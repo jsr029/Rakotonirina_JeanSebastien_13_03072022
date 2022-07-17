@@ -6,17 +6,18 @@ import Footer from '../components/Footer';
 import NavMain from '../components/NavMain';
 import { baseUrl } from '../App';
 
-function Login() {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+function SignUp() {
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const [formData, setForm] = useState(
-    JSON.parse(localStorage.getItem('form-Data')) || false
+    JSON.parse(localStorage.getItem('signUp')) || false
   )
   const [message, setMessage] = useState('')
   const history = useHistory()
-  console.log(watch("email"))
 
   function handleChange(e) {
     setForm({
+      firstname: e.target.value,
+      lastname: e.targe.value,
       email: e.target.value.trim(),
       password: e.target.value,
     })
@@ -25,16 +26,17 @@ function Login() {
     axios({
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
-      url: baseUrl + '/login',
+      url: baseUrl + '/signup',
       data: {
         ...data,
+        firstname: data.firstname,
+        lastname: data.lastname,
         email: data.email,
-        password: data.password,
-        token: data.body
+        password: data.password
       },
     })
       .then(function (response) {
-        localStorage.setItem('form-Data', JSON.stringify(
+        localStorage.setItem('signUp', JSON.stringify(
           {
             'data': response.config.data,
             'token': response.data.body.token
@@ -62,9 +64,27 @@ function Login() {
       <main className="main bg-dark">
         <section className="sign-in-content">
           <i className="fa fa-user-circle sign-in-icon"></i>
-          <h1>Sign In</h1>
+          <h1>Sign Up</h1>
           <form onSubmit={handleSubmit(onSubmit)} >
             <div className="input-wrapper">
+              <label htmlFor="email">Fisrt Name</label>
+              <input
+                type="text"
+                id="firstname"
+                name="firstname"
+                value={formData.firstname}
+                {...register("firstname")}
+                onChange={() => handleChange}
+              />              
+              <label htmlFor="email">Last Name</label>
+              <input
+                type="text"
+                id="lastname"
+                name="lstaname"
+                value={formData.lastname}
+                {...register("lastname")}
+                onChange={() => handleChange}
+              />
               <label htmlFor="email">Email</label>
               <input
                 type="email"
@@ -91,7 +111,7 @@ function Login() {
               <label htmlFor="remember-me">Remember me</label>
             </div>
             {/** PLACEHOLDER DUE TO STATIC SITE */}
-            <input type="submit" className="sign-in-button" value="Sign-in" />
+            <input type="submit" className="sign-in-button" value="Sign-Up" />
             {/** SHOULD BE THE BUTTON BELOW */}
             {/** <button className="sign-in-button">Sign In</button> */}
             <div className='message'>{message ? message : ''}</div>
@@ -103,4 +123,4 @@ function Login() {
   );
 };
 
-export default Login;
+export default SignUp;
