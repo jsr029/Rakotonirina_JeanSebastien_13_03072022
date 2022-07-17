@@ -1,0 +1,15 @@
+{
+  "name": "package.json",
+  "version": "1.0.0",
+  "description": "P13 Argent Bank Api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "openclassrooms",
+    "p13"
+  ],
+  "author": "jsr029",
+  "license": "ISC"
+}
