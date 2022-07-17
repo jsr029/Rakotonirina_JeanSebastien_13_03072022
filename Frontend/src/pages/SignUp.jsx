@@ -16,8 +16,8 @@ function SignUp() {
 
   function handleChange(e) {
     setForm({
-      firstname: e.target.value,
-      lastname: e.targe.value,
+      firstName: e.target.value,
+      lastName: e.targe.value,
       email: e.target.value.trim(),
       password: e.target.value,
     })
@@ -29,31 +29,28 @@ function SignUp() {
       url: baseUrl + '/signup',
       data: {
         ...data,
-        firstname: data.firstname,
-        lastname: data.lastname,
+        firstName: data.firstName,
+        lastName: data.lastName,
         email: data.email,
         password: data.password
       },
     })
       .then(function (response) {
+        console.log(response)
         localStorage.setItem('signUp', JSON.stringify(
           {
-            'data': response.config.data,
-            'token': response.data.body.token
+            data: response.config.data
           }
           ));
-        if (formData) {
           setForm({
-            data: response.config.data,
-            token: response.data.body.token
+            data: response.config.data
           })
-        }
-        history.push("/user")
-        setMessage('You are logged in.')
+        history.push("/")
+        setMessage('You are registered.')
         console.log(response);
       })
       .catch(function (error) {
-        setMessage('You are not logged in.')
+        setMessage('You are not registered.')
         console.log(error);
       });
   }
@@ -70,19 +67,19 @@ function SignUp() {
               <label htmlFor="email">Fisrt Name</label>
               <input
                 type="text"
-                id="firstname"
-                name="firstname"
-                value={formData.firstname}
-                {...register("firstname")}
+                id="firstName"
+                name="firstName"
+                value={formData.firstName}
+                {...register("firstName")}
                 onChange={() => handleChange}
               />              
               <label htmlFor="email">Last Name</label>
               <input
                 type="text"
-                id="lastname"
-                name="lstaname"
-                value={formData.lastname}
-                {...register("lastname")}
+                id="lastName"
+                name="lastName"
+                value={formData.lastName}
+                {...register("lastName")}
                 onChange={() => handleChange}
               />
               <label htmlFor="email">Email</label>
@@ -114,7 +111,6 @@ function SignUp() {
             <input type="submit" className="sign-in-button" value="Sign-Up" />
             {/** SHOULD BE THE BUTTON BELOW */}
             {/** <button className="sign-in-button">Sign In</button> */}
-            <div className='message'>{message ? message : ''}</div>
           </form>
         </section>
       </main>

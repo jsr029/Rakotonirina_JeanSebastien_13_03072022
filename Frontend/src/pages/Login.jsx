@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import Footer from '../components/Footer';
 import NavMain from '../components/NavMain';
 import { baseUrl } from '../App';
@@ -92,6 +92,7 @@ function Login() {
             </div>
             {/** PLACEHOLDER DUE TO STATIC SITE */}
             <input type="submit" className="sign-in-button" value="Sign-in" />
+            <div>Create a count ? <Link to='/sign-up'>Sign-Up</Link></div>
             {/** SHOULD BE THE BUTTON BELOW */}
             {/** <button className="sign-in-button">Sign In</button> */}
             <div className='message'>{message ? message : ''}</div>
