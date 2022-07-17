@@ -1,0 +1,4 @@
+- Installer mongodb en local
+- Créer la base de données s'inspirer du readme pour le nom de la base
+
+Lancer d'abord polpulate avant de lancer le server backend nom de la db argentBankDB
