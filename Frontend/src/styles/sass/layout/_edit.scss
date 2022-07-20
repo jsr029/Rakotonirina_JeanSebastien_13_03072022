@@ -1,0 +1,33 @@
+.bloc-form-edit{
+    max-width: 500px;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    row-gap: 5px;
+    input{
+        padding: 5px;
+        border-radius: 5px;
+        margin: 5px;
+    }
+    label{
+        font-size: 21px;
+        margin: 0;
+        padding: 0;
+    }
+}
+.bloc-name, .bloc-email{
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    align-items: center;
+}
+.header{
+    text-align: center;
+    display: block;
+}

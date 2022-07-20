@@ -22,7 +22,7 @@ function SignUp() {
       password: e.target.value,
     })
   }
-  function onSubmit(data, config) {
+  function onSubmit(data) {
     axios({
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
@@ -41,10 +41,10 @@ function SignUp() {
           {
             data: response.config.data
           }
-          ));
-          setForm({
-            data: response.config.data
-          })
+        ));
+        setForm({
+          data: response.config.data
+        })
         history.push("/")
         setMessage('You are registered.')
         console.log(response);
@@ -62,7 +62,7 @@ function SignUp() {
         <section className="sign-in-content">
           <i className="fa fa-user-circle sign-in-icon"></i>
           <h1>Sign Up</h1>
-          <form onSubmit={handleSubmit(onSubmit)} >
+          <form onSubmit={() => handleSubmit(onSubmit)} >
             <div className="input-wrapper">
               <label htmlFor="email">Fisrt Name</label>
               <input
@@ -72,7 +72,8 @@ function SignUp() {
                 value={formData.firstName}
                 {...register("firstName")}
                 onChange={() => handleChange}
-              />              
+              />
+              {errors.firstName && <p>{errors.firstName.message}</p>}
               <label htmlFor="email">Last Name</label>
               <input
                 type="text"
@@ -82,6 +83,7 @@ function SignUp() {
                 {...register("lastName")}
                 onChange={() => handleChange}
               />
+              {errors.lastName && <p>{errors.lastName.message}</p>}
               <label htmlFor="email">Email</label>
               <input
                 type="email"
@@ -91,6 +93,7 @@ function SignUp() {
                 {...register("email")}
                 onChange={() => handleChange}
               />
+              {errors.email && <p>{errors.email.message}</p>}
             </div>
             <div className="input-wrapper">
               <label htmlFor="password">Password</label>

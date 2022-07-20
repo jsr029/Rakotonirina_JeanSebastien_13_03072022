@@ -5,6 +5,7 @@ import { useHistory, Link } from "react-router-dom";
 import Footer from '../components/Footer';
 import NavMain from '../components/NavMain';
 import { baseUrl } from '../App';
+import { ErrorMessage } from '@hookform/error-message';
 
 function Login() {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -16,12 +17,13 @@ function Login() {
   console.log(watch("email"))
 
   function handleChange(e) {
+    e.preventDefault()
     setForm({
       email: e.target.value.trim(),
       password: e.target.value,
     })
   }
-  function onSubmit(data, config) {
+  function onSubmit(data) {
     axios({
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
@@ -39,7 +41,7 @@ function Login() {
             'data': response.config.data,
             'token': response.data.body.token
           }
-          ));
+        ));
         if (formData) {
           setForm({
             data: response.config.data,
@@ -71,9 +73,20 @@ function Login() {
                 id="email"
                 name="email"
                 value={formData.email}
-                {...register("email")}
+                {...register("email", {
+                  required: 'This field is required',
+                  pattern: {
+                    value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                    massage: 'Invlaid format email, try again !'
+                  },
+                  isEmpty: false
+                })}
                 onChange={() => handleChange}
               />
+              {errors.email?.message && (
+                <ErrorMessage errorMessage={errors.email?.message} />
+              )}
+
             </div>
             <div className="input-wrapper">
               <label htmlFor="password">Password</label>
@@ -83,8 +96,13 @@ function Login() {
                 name="password"
                 value={formData.password}
                 onChange={() => handleChange}
-                {...register("password")}
+                {...register("password", {
+                  minLength: 8,
+                  required: 'This field is required',
+                  isEmpty: false
+                })}
               />
+              {errors.password && <p>{errors.password.message}</p>}
             </div>
             <div className="input-remember">
               <input type="checkbox" id="remember-me" />
