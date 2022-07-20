@@ -22,12 +22,13 @@ const UserPage = () => {
   const [message, setMessage] = useState('')
   const token = response.token
   const [showForm, setShowForm] = useState(true)
-  const [formData, setForm] = useState({
-    firstName: firstName,
-    lastName: lastName,
-    email: email,
-    password: password
-  })
+  const initialData = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: ''
+    }
+  const [formData, setForm] = useState(initialData)
     function handleClick() {
       setShowForm((prevState) => (!prevState))
     }
@@ -85,16 +86,16 @@ const UserPage = () => {
                       type='text'
                       id='firstName'
                       name='firstName'
-                      value={formData.firstName}
+                      value={firstName}
                       {...register("firstName")}
-                      onChange={() => handleChange} 
+                      onChange={handleChange} 
                        />
                     <label htmlFor="lastName">Last Name</label>
                     <input 
                     type='text' 
                     id='lastName' 
                     name='lastName' 
-                    value={formData.lastName}
+                    value={lastName}
                       {...register("lastName")}
                       onChange={() => handleChange} 
                        />
@@ -105,7 +106,7 @@ const UserPage = () => {
                       type='email' 
                       id='email' 
                       name='email' 
-                      value={formData.email}
+                      value={email}
                         {...register("email")}
                         onChange={() => handleChange}
                          />
@@ -114,7 +115,7 @@ const UserPage = () => {
                       type='password' 
                       id='password' 
                       name='password' 
-                      value={formData.password}
+                      value={password}
                         {...register("password")}
                         onChange={() => handleChange()}
                          />
