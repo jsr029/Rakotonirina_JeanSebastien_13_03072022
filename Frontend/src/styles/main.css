@@ -195,12 +195,32 @@ img {
 .footer {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   border-top: 2px solid #ccc;
   padding: 2rem 0 1.5rem;
 }
 .footer-text {
   margin: 0;
   padding: 0;
+}
+.footer-counter {
+  width: 200px;
+  margin: 5px auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.footer-counter h2 {
+  line-height: 15px;
+}
+.footer-counter-button {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .bg-dark {
