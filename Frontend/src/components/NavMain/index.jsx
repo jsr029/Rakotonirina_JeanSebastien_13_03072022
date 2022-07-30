@@ -1,29 +1,47 @@
-import React from 'react'
+import { NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+import { logoutRequest } from '../../actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom';
+import { faUserCircle, faSignOut } from '@fortawesome/free-solid-svg-icons'
 
-const NavMain = ({ message, logout }) => {
+function NavMain() {
+
+    const dispatch = useDispatch();
+
+    const status = useSelector(state => state.userReducer.status);
+    const user = useSelector(state => state.userReducer.firstName);
+    const id = useSelector(state => state.userReducer.id);
+
+    const handleLogOut = () => {
+        dispatch(logoutRequest());   
+    }
+       
     return (
-        <>
-            <nav className="main-nav">
-                <Link to="/" className='main-nav-logo'>
-                    <img className='main-nav-logo-image' src='http://127.0.0.1:3000/img/argentBankLogo.png' alt='Argent Bank Logo' />
-                    <h1 className="sr-only">Argent Bank</h1>
-                </Link>
-                <div>
-                <div className="main-nav-message">{message ? message : ''}</div>
-                   {logout ? 
-                   <Link to="/logout">{logout}</Link>
-                   : 
-                    <Link to="/login" className="main-nav-item">
-                        <FontAwesomeIcon icon={faUserCircle} />
-                        Sign In
-                    </Link>}
-                </div>
-            </nav>
-        </>
-    );
-};
+    <>
+        <nav className="main-nav">
+            <NavLink className="main-nav-logo" to="/">
+                <img
+                className="main-nav-logo-image"
+                src="http://127.0.0.1:3000/img/argentBankLogo.png"
+                alt="Argent Bank Logo"
+                />
+                <h1 className="sr-only">Argent Bank</h1>
+            </NavLink>
+            <div className="main-nav-link">
+                <NavLink className="main-nav-item" to={status === 200 ? `/user/${id}/${user}` : '/sign-in'}>
+                <FontAwesomeIcon icon={faUserCircle} />
+                    {status === 200 ? user : 'Sign In'}
+                </NavLink>
+                {status === 200 ? <NavLink className="main-nav-item" to="/" onClick={handleLogOut}>
+                <FontAwesomeIcon icon={faSignOut} />
+                                    Sign Out
+                </NavLink> : ''}
+                
+            </div>
+        </nav>
+    </>
+    
+    )
+}
 
 export default NavMain;

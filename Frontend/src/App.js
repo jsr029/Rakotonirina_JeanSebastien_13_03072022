@@ -1,24 +1,24 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { Router, Route, Switch } from 'react-router-dom'
 import Home from './pages/Home'
-import Login from './pages/Login'
-import Logout from './components/logout'
-import SignUP from './pages/SignUp'
-import UserPage from './pages/UserPage'
-import Edit from './components/Edit'
+import SignIn from './components/SignIn'
+import SignUp from './components/SignUp'
+import UserProfile from './components/UserProfile'
+import EditProfile from './components/EditProfile'
+import { createBrowserHistory } from 'history'
 import "./styles/main.css"
 
-export const baseUrl = 'http://127.0.0.1:3001/api/v1/user'
+export const history = createBrowserHistory()
+export const baseUrl = 'http://localhost:27017/api/v1/user'
 function App() {
   return (
-    <Router>
+    <Router history={history}>
       <Switch>
         <Route exact path='/' component={Home} />
-        <Route path='/login' component={Login} />
-        <Route path='/sign-up' component={SignUP} />
-        <Route path='/logout' component={Logout} />
-        <Route path='/user' component={UserPage} />
-        <Route path='/edit' component={Edit} />
+        <Route path='/sign-in' component={SignIn} />
+        <Route path="/sign-up" component={SignUp} />
+        <Route path="/user/:id/:name" component={UserProfile} />
+        <Route path="/edit-profile/:id/:name" component={EditProfile} />
       </Switch>
     </Router>
   );

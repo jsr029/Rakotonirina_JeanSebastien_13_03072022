@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios'
 import { useForm } from "react-hook-form";
 import { useHistory, Link } from "react-router-dom";
 import { baseUrl } from '../../App';
 import { ErrorMessage } from '@hookform/error-message';
-import { getAllPosts } from '../../actions';
 
-const LoginCPT = ({ getAllPosts, posts }) => {
-    useEffect(() => {
-        getAllPosts();
-    }, [getAllPosts]);
+const LoginCPT = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [formData, setForm] = useState(
         JSON.parse(localStorage.getItem('form-Data')) || false
