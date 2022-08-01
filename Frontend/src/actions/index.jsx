@@ -105,7 +105,7 @@ export const accessProfile = (token) => {
     }
 }
 
-export const modifyName = (token, newFirstName, newLastName, newEmail, newPassword) => {
+export const modifyName = (token, newFirstName, newLastName) => {
     return (dispatch) => {
         return axios({
             method: 'PUT',
@@ -115,18 +115,18 @@ export const modifyName = (token, newFirstName, newLastName, newEmail, newPasswo
             },
             data: {
                 "firstName": newFirstName,
-                "lastName": newLastName,
-                "email": newEmail,
-                "password": newPassword
+                "lastName": newLastName
             },
             url: baseUrl + '/profile'
         })
             .then(response => {
+                console.log(response)
                 dispatch(receiveData(response.data.body, response.data.status));
                 dispatch(logoutRequest());
                 history.push(`/sign-in`);
             })
             .catch(error => {
+                console.log(error)
                 if (error.response.status !== 200) {
                     dispatch(loginFailure(error))
                 }

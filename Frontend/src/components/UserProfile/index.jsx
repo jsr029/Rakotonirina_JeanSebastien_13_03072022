@@ -77,10 +77,10 @@ function UserProfile({ history }) {
         event.preventDefault();
 
         const isFormValid = validate();
-        if (isFormValid) dispatch(modifyName(token, newFirstName, newLastName, newEmail, newPassword));
+        if (isFormValid) dispatch(modifyName(token, newFirstName, newLastName));
     }
 
-    if (!firstName) {
+     if(!firstName) {
         history.push({ pathname: `/` })
         return <Home />
     }
@@ -93,7 +93,7 @@ function UserProfile({ history }) {
                     <h1>Welcome back <br />
                         {
                             showForm ? firstName + ' ' + lastName + ' !' :
-                                <form className='bloc-form-edit' onSubmit={handleSubmit}>
+                                <form className='bloc-form-edit' onSubmit={(e)=>handleSubmit(e)}>
                                     <div className='bloc-name'>
                                         <label htmlFor="firstName">Fisrt Name</label>
                                         <input
@@ -136,7 +136,7 @@ function UserProfile({ history }) {
                                         />
                                         {newPasswordError ? <div className="form-error">{newPasswordError}</div> : null}
                                     </div>
-                                    <input type='submit' value='Save' />
+                                    <button type='submit'>Save</button>
                                     {status && status !== 200 ? <h3 className="error-login">{message}</h3> : null }
                                 </form>
                         }
@@ -176,11 +176,6 @@ function UserProfile({ history }) {
                         <button className="transaction-button">View transactions</button>
                     </div>
                 </section>
-                <div className="customer-info">
-                    <p>Member ID : {id}</p>
-                    <p>Member since : {creationDate} </p>
-                    <p>Last modified : {updatedAt}</p>
-                </div>
             </main>
             <Footer />
         </>
