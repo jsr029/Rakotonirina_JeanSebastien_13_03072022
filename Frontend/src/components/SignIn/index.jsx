@@ -17,8 +17,7 @@ function SignIn() {
 
   const [passwordError, setPasswordError] = useState('')
   const [emailError, setEmailError] = useState('')
-
-
+  
   const validate = () => {
 
     let emailErrorMessage = ''

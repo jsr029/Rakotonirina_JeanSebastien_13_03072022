@@ -17,8 +17,8 @@ function App() {
         <Route exact path='/' component={Home} />
         <Route path='/sign-in' component={SignIn} />
         <Route path="/sign-up" component={SignUp} />
-        <Route path="/user/:id/:name" component={UserProfile} />
-        <Route path="/edit-profile/:id/:name" component={EditProfile} />
+        <Route path="/user/:name" component={UserProfile} />
+        <Route path="/edit-profile/:name" component={EditProfile} />
       </Switch>
     </Router>
   );

@@ -276,6 +276,10 @@ img {
   font-size: 1.2rem;
 }
 
+.customer-info {
+  color: white;
+}
+
 .account {
   display: flex;
   justify-content: space-between;
@@ -353,6 +357,7 @@ img {
 }
 .bloc-form-edit {
   max-width: 500px;
+  background: #004d00;
   margin: auto;
   margin-top: 5px;
   margin-bottom: 10px;

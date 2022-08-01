@@ -1,4 +1,5 @@
 import { history, baseUrl } from "../App"
+import axios from 'axios'
 
 export const increment = () => {
     return {
@@ -8,11 +9,6 @@ export const increment = () => {
 export const decrement = () => {
     return {
         type: 'DECREMENT'
-    }
-}
-export const reset = () => {
-    return {
-        type: 'RESET'
     }
 }
 export const logoutRequest = () => {
@@ -42,6 +38,11 @@ export const loginFailure = (status, message) => {
     }
 }
 
+export const reset = () => {
+    return {
+        type: 'RESET'
+    }
+}
 
 export const receiveData = (data, status) => {
     return {
@@ -55,22 +56,21 @@ export const receiveData = (data, status) => {
 
 export const loginUser = (username, password) => {
     return (dispatch) => {
-        const requestOptions = {
+        return axios({
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
+            data: {
                 "email": username,
                 "password": password
-            })
-        };
-        return fetch(baseUrl + '/login', requestOptions)
-            .then(response => response.json())
-            .then(data => {
+            },
+            url: baseUrl + '/login'
+        })
+            .then(response => {
                 try {
-                    dispatch(loginSuccess(data.body.token, data.status, data.message));
-                    dispatch(accessProfile(data.body.token));
-                } catch(e) {
-                    dispatch(loginFailure(data.status, data.message));
+                    dispatch(loginSuccess(response.data.body.token, response.data.status, response.data.message));
+                    dispatch(accessProfile(response.data.body.token));
+                } catch (e) {
+                    dispatch(loginFailure(response.data.status, response.data.message));
                 }
             })
             .catch(error => {
@@ -81,44 +81,48 @@ export const loginUser = (username, password) => {
 
 export const accessProfile = (token) => {
     return (dispatch) => {
-        const requestOptions = {
+        return axios({
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-        };
-        return fetch(baseUrl + '/profile', requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                dispatch(receiveData(data.body, data.status));
-                history.push(`/user/${data.body.id}/${(data.body.firstName).toLowerCase()}`);
+            data: {
+                token: token
+            },
+            url: baseUrl + '/profile'
+        })
+            .then(response => {
+                console.log(response.data)
+                dispatch(receiveData(response.data.body, response.data.status));
+                history.push(`/user/${(response.data.body.firstName).toLowerCase()}`);
             })
             .catch(error => {
-                if(error.response.status === 401) {
-                  dispatch(loginFailure(error));
+                if (error.status === 401) {
+                    dispatch(loginFailure(error));
                 }
             })
-       }
+    }
 }
 
-export const modifyName = (token, newFirstName, newLastName) => {
+export const modifyName = (token, newFirstName, newLastName, newEmail, newPassword) => {
     return (dispatch) => {
-        const requestOptions = {
+        return axios({
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({
+            data: {
                 "firstName": newFirstName,
-                "lastName": newLastName
-            })
-        };
-        return fetch(baseUrl + '/profile', requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                dispatch(receiveData(data.body, data.status));
+                "lastName": newLastName,
+                "email": newEmail,
+                "password": newPassword
+            },
+            url: baseUrl + '/profile'
+        })
+            .then(response => {
+                dispatch(receiveData(response.data.body, response.data.status));
                 dispatch(logoutRequest());
                 history.push(`/sign-in`);
             })
@@ -126,39 +130,37 @@ export const modifyName = (token, newFirstName, newLastName) => {
                 if (error.response.status !== 200) {
                     dispatch(loginFailure(error))
                 }
-        })
+            })
     }
 }
 
 export const signUpUser = (email, password, firstName, lastName) => {
     return (dispatch) => {
-        const requestOptions = {
+        return axios({
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
+            data: {
                 "email": email,
                 "password": password,
                 "firstName": firstName,
                 "lastName": lastName
-            })
-        };
-        return fetch(baseUrl + '/signup', requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 200) {
+            },
+            url: baseUrl + '/signup'
+        })
+            .then(response => {
+                if (response.data.status === 200) {
                     dispatch(logoutRequest())
                     history.push(`/sign-in`);
                 } else {
-                    dispatch(loginFailure(data.status, data.message));
+                    dispatch(loginFailure(response.data.status, response.data.message));
                 }
-                
             })
             .catch(error => {
                 if (error.response.status !== 200) {
                     dispatch(loginFailure(error))
                 }
-        })
+            })
     }
 }

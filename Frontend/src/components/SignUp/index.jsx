@@ -63,7 +63,7 @@ function SignUp() {
         <>
             <NavMain />
             <main className="main bg-dark">
-                <section className="sign-up-content">
+                <section className="sign-in-content">
                     <i className="fa fa-user-plus sign-up-icon"></i>
                     <h1>Sign Up</h1>
                     <form onSubmit={handleSubmit}>

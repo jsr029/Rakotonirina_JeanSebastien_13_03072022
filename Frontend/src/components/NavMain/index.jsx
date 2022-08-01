@@ -34,7 +34,6 @@ function NavMain() {
                 </NavLink>
                 {status === 200 ? <NavLink className="main-nav-item" to="/" onClick={handleLogOut}>
                 <FontAwesomeIcon icon={faSignOut} />
-                                    Sign Out
                 </NavLink> : ''}
                 
             </div>

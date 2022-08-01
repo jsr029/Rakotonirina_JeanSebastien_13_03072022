@@ -1,4 +1,4 @@
-const userReducer = (state = {status: '' , email: '', firstName: '', lastName: '', id:''}, action) => {
+const userReducer = (state = {status: '' , email: '', firstName: '', lastName: '', id:'', password: ''}, action) => {
     switch (action.type) {
         case 'RECEIVE_DATA':
             return state = {
@@ -8,7 +8,8 @@ const userReducer = (state = {status: '' , email: '', firstName: '', lastName: '
                 updatedAt: action.payload.data.updatedAt,
                 email: action.payload.data.email,
                 firstName: action.payload.data.firstName,
-                lastName: action.payload.data.lastName
+                lastName: action.payload.data.lastName,
+                password: action.payload.data.password
             };
         default:
             return state;

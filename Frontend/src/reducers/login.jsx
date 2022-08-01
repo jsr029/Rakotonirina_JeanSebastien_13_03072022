@@ -4,19 +4,19 @@ const loginReducer = (state = {token: '', status: '', message: ''}, action) => {
             return state = {
                 token: action.payload.token,
                 status: action.payload.status,
-                message: action.payload.message
+                message: action.payload.message,
             }
         case 'LOGIN_FAILURE':
             return state = {
                 token: null,
                 status: action.payload.status,
-                message: action.payload.message
+                message: action.payload.message,
             }
         case 'RESET':
             return state = {
                 token: null,
                 status: null,
-                message: null
+                message: null,
             }
         default:
             return state;
