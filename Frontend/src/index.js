@@ -4,12 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import thunk from 'redux-thunk'
-import { createStore, applyMiddleware,compose } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from "redux-devtools-extension";
 import allReducers from './reducers';
 import { Provider } from 'react-redux';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+//const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = [thunk];
 const store = createStore(
   allReducers,
