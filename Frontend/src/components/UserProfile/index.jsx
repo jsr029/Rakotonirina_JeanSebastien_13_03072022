@@ -4,9 +4,9 @@ import { modifyName } from "../../actions"
 import NavMain from '../NavMain'
 import Footer from '../Footer'
 import Home from '../../pages/Home'
+import { history } from '../../App'
 
-
-function UserProfile({ history }) {
+function UserProfile() {
     const dispatch = useDispatch();
 
     const status = useSelector(state => state.loginReducer.status);
@@ -21,7 +21,7 @@ function UserProfile({ history }) {
 
     const firstName = useSelector(state => state.userReducer.firstName)
     const lastName = useSelector(state => state.userReducer.lastName)
-    const id = useSelector(state => state.userReducer.id)
+    //const id = useSelector(state => state.userReducer.id)
     const [showForm, setShowForm] = useState(true)
 
     const validate = () => {
@@ -49,7 +49,7 @@ function UserProfile({ history }) {
     }, [firstName, lastName])
 
     const handleClick = () => {
-        setShowForm(false)
+        setShowForm(prevState => !prevState)
     }
 
      /*const handleClickEdit = (event) => {
@@ -59,15 +59,15 @@ function UserProfile({ history }) {
      
     const handleSubmit = (event) => {
         event.preventDefault();
-
         const isFormValid = validate();
         if (isFormValid) dispatch(modifyName(token, newFirstName, newLastName));
+        history.push('/sign-in')
     }
 
-     if(!firstName) {
+     /*if(!firstName) {
         history.push({ pathname: `/` })
         return <Home />
-    }
+    }*/
 
     return (
         <>
@@ -104,8 +104,8 @@ function UserProfile({ history }) {
                                 </form>
                         }
                     </h1>
-                    <button className={'edit-button ' + showForm ? 'formEdit' : 'noFormEdit'} onClick={handleClick}>
-                        Edit Name
+                    <button className={'edit-button ' + showForm ? 'formEdit' : 'noFormEdit'} onClick={()=>handleClick()}>
+                        Edit Panel
                     </button>
                 </div>
                 <h2 className="sr-only">Accounts</h2>

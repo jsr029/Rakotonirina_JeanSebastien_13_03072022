@@ -96,6 +96,30 @@ function EditProfile() {
                         />
                         { newLastNameError ? <div className="form-error">{newLastNameError}</div> : null  }  
                     </div>
+                    <div className="input-wrapper">
+                        <label htmlFor="email">Your New Email</label>
+                        <input
+                            placeholder={email}
+                            name="email"
+                            type="text"
+                            id="lastName"
+                            value={newEmail}
+                            onChange={(event) => setNewEmail(event.target.value)}
+                        />
+                        { newEmailError ? <div className="form-error">{newEmailError}</div> : null  }  
+                    </div>
+                    <div className="input-wrapper">
+                        <label htmlFor="password">Your New Password</label>
+                        <input
+                            placeholder={password}
+                            name="password"
+                            type="password"
+                            id="password"
+                            value={newPassword}
+                            onChange={(event) => setNewPassword(event.target.value)}
+                        />
+                        { newPasswordError ? <div className="form-error">{newPasswordError}</div> : null  }  
+                    </div>
                     <button className="sign-in-button" type="submit">Edit</button>
                 </form>
                 {status && status !== 200 ? <h3 className="error-login">{message}</h3> : null }
