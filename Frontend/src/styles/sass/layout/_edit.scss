@@ -7,8 +7,8 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: baseline;
+    justify-content: space-around;
+    align-items: center;
     row-gap: 5px;
     input{
         padding: 5px;
@@ -20,6 +20,12 @@
         margin: 0;
         padding: 0;
     }
+}
+.visiblePanel{
+    visibility: hidden;
+}
+.invisiblePanel{
+    visibility: visible;
 }
 .bloc-name, .bloc-email{
     margin-bottom: 10px;

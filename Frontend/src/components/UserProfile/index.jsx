@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { modifyName } from "../../actions"
 import NavMain from '../NavMain'
 import Footer from '../Footer'
-import Home from '../../pages/Home'
+//import Home from '../../pages/Home'
 import { history } from '../../App'
 
 function UserProfile() {
@@ -23,6 +23,7 @@ function UserProfile() {
     const lastName = useSelector(state => state.userReducer.lastName)
     //const id = useSelector(state => state.userReducer.id)
     const [showForm, setShowForm] = useState(true)
+    const[classButton, setClassButton] = useState(false)
 
     const validate = () => {
 
@@ -50,6 +51,7 @@ function UserProfile() {
 
     const handleClick = () => {
         setShowForm(prevState => !prevState)
+        setClassButton(prevState => !prevState)
     }
 
      /*const handleClickEdit = (event) => {
@@ -76,7 +78,7 @@ function UserProfile() {
                 <div className="header">
                     <h1>Welcome back <br />
                         {
-                            showForm ? firstName + ' ' + lastName + ' !' :
+                            showForm ? firstName + ' ' + lastName + ' !' :  firstName + ' ' + lastName + ' !'} 
                                 <form className='bloc-form-edit' onSubmit={(e)=>handleSubmit(e)}>
                                     <div className='bloc-name'>
                                         <label htmlFor="firstName">Fisrt Name</label>
@@ -99,12 +101,12 @@ function UserProfile() {
                                         />
                                         {newLastNameError ? <div className="form-error">{newLastNameError}</div> : null}
                                     </div>
-                                    <button type='submit'>Save</button>
+                                    <button className='edit-button' type='submit'>Save</button>
                                     {status && status !== 200 ? <h3 className="error-login">{message}</h3> : null }
                                 </form>
-                        }
+                        
                     </h1>
-                    <button className={'edit-button ' + showForm ? 'formEdit' : 'noFormEdit'} onClick={()=>handleClick()}>
+                    <button className={`edit-button ${classButton ? "visiblePanel" : "invisiblePanel"}`} onClick={()=>handleClick()}>
                         Edit Panel
                     </button>
                 </div>
