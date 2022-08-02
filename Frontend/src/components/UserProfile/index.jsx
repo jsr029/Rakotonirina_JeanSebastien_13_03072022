@@ -15,46 +15,29 @@ function UserProfile({ history }) {
     const token = useSelector(state => state.loginReducer.token);
     const [newFirstName, setNewFirstName] = useState('');
     const [newLastName, setNewLastName] = useState('');
-    const [newEmail, setNewEmail] = useState('');
-    const [newPassword, setNewPassword] = useState('');
 
     const [newFirstNameError, setNewFirstNameError] = useState('');
     const [newLastNameError, setNewLastNameError] = useState('');
-    const [newEmailError, setNewEmailError] = useState('');
-    const [newPasswordError, setNewPasswordError] = useState('');
 
     const firstName = useSelector(state => state.userReducer.firstName)
     const lastName = useSelector(state => state.userReducer.lastName)
-    const email = useSelector(state => state.userReducer.email)
-    const password = useSelector(state => state.userReducer.password)
     const id = useSelector(state => state.userReducer.id)
-    const creationDate = new Date(Date.parse(useSelector(state => state.userReducer.createdAt))).toLocaleString()
-    const updatedAt = new Date(Date.parse(useSelector(state => state.userReducer.updatedAt))).toLocaleString()
-
     const [showForm, setShowForm] = useState(true)
 
     const validate = () => {
 
         let newFisrtNameErrorMessage = '';
         let newLastNameErrorMessage = '';
-        let newEmailErrorMessage = '';
-        let newPasswordErrorMessage = '';
 
         if (!newFirstName) { newFisrtNameErrorMessage = 'This field cannot be left empty.' };
         if (!newLastName) { newLastNameErrorMessage = 'This field cannot be left empty.' };
-        if (!newEmail) { newEmailErrorMessage = 'This field cannot be left empty.' };
-        if (!newPassword) { newPasswordErrorMessage = 'This field cannot be left empty.' };
 
 
         if (newFisrtNameErrorMessage ||
-            newLastNameErrorMessage ||
-            newEmailErrorMessage ||
-            newPasswordErrorMessage
+            newLastNameErrorMessage 
         ) {
             setNewFirstNameError(newFisrtNameErrorMessage);
             setNewLastNameError(newLastNameErrorMessage);
-            setNewEmailError(newEmailErrorMessage);
-            setNewPasswordError(newPasswordErrorMessage);
             return false;
         }
 
@@ -69,10 +52,11 @@ function UserProfile({ history }) {
         setShowForm(false)
     }
 
-    /* const handleClickEdit = (event) => {
+     /*const handleClickEdit = (event) => {
          event.preventDefault()
          history.push({pathname: `/edit-profile/${id}/${(firstName).toLowerCase()}`})
      }*/
+     
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -114,27 +98,6 @@ function UserProfile({ history }) {
                                             onChange={(event) => setNewLastName(event.target.value)}
                                         />
                                         {newLastNameError ? <div className="form-error">{newLastNameError}</div> : null}
-                                    </div>
-                                    <div className='bloc-email'>
-                                        <label htmlFor="email">Email</label>
-                                        <input
-                                            type='email'
-                                            id='email'
-                                            name='email'
-                                            placeholder={email}
-                                            value={newEmail}
-                                            onChange={(event) => setNewEmail(event.target.value)}
-                                        />
-                                        {newEmailError ? <div className="form-error">{newEmailError}</div> : null}                                          <label htmlFor="password">Password</label>
-                                        <input
-                                            type='password'
-                                            id='password'
-                                            name='password'
-                                            placeholder={password}
-                                            value={newPassword}
-                                            onChange={(event) => setNewPassword(event.target.value)}
-                                        />
-                                        {newPasswordError ? <div className="form-error">{newPasswordError}</div> : null}
                                     </div>
                                     <button type='submit'>Save</button>
                                     {status && status !== 200 ? <h3 className="error-login">{message}</h3> : null }
