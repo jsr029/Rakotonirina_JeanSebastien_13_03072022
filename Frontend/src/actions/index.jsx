@@ -11,6 +11,21 @@ export const decrement = () => {
         type: 'DECREMENT'
     }
 }
+export const showForm = () => {
+    return {
+        type: 'SHOWFORM'
+    }
+}
+export const buttonName = () => {
+    return {
+        type: 'BUTTONNAME'
+    }
+}
+export const classButton = () => {
+    return {
+        type: 'CLASSBUTTON'
+    }
+}
 export const logoutRequest = () => {
     return {
         type: 'USER_LOGGED_OUT'

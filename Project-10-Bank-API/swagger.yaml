@@ -110,6 +110,96 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
+  /user/transactions/{month}:
+    get:
+      tags:
+      - User Transactions
+      summary: Get all transactions per month
+      description: Get informations about transactions per month
+      operationId: getTransactionPerMonth
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: header
+        name: Authorization
+        description: Attach Bearer JWT
+        type: string
+        required: true
+      - in: path
+        name: month
+        description: The month that needs to be fetched
+        required: true
+        type: integer
+      responses:
+        '200':
+          description: Transaction retrieved successully
+          schema:
+            $ref: '#/definitions/TransactionsPerMonth'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /user/transactions/{id}:
+    get:
+      tags:
+      - User Transactions
+      summary: Get one transaction per id
+      description: Get informations about one transaction per id
+      operationId: getTransactionPerId
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: header
+        name: Authorization
+        description: Attach Bearer JWT
+        type: string
+        required: true
+      - in: path
+        name: id
+        description: The id that needs to be fetched
+        required: true
+        type: integer
+      responses:
+        '200':
+          description: Transaction retrieved successully
+          schema:
+            $ref: '#/definitions/TransactionsPerId'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - User Transactions
+      summary: Update Transaction by id
+      description: API for updating a transaction by id
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+        - in: body
+          name: body
+          description: Update transaction attributes
+          required: true
+          schema:
+            $ref: '#/definitions/TransactionsPerId'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: transaction updated successully
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -138,6 +228,38 @@ definitions:
       password:
         type: string
         description: user password
+  TransactionsPerMonth:
+    type: object
+    properties:
+      transactions: 
+        type: object
+        properties:
+          id:
+            type: number
+            description: transaction id
+          title:
+            type: string
+            description: transaction title
+          amount:
+            type: number
+            description: transaction amount
+          created:
+            type: string
+            description: transaction date created
+  TransactionsPerId:
+    properties:
+      id:
+        type: number
+        description: transaction id
+      title:
+        type: string
+        description: transaction title
+      amount:
+        type: number
+        description: transaction amount
+      created:
+        type: string
+        description: transaction date created
   ApiResponse:
     type: object
     properties:

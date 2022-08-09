@@ -1,5 +1,5 @@
-import React from 'react'
-import { Router, Route, Switch } from 'react-router-dom'
+import * as React from 'react'
+import { Router, Route, Switch, Redirect } from 'react-router-dom'
 import Home from './pages/Home'
 import SignIn from './components/SignIn'
 import SignUp from './components/SignUp'
@@ -19,6 +19,9 @@ function App() {
         <Route path="/sign-up" component={SignUp} />
         <Route path="/user/:name" component={UserProfile} />
         <Route path="/edit-profile/:name" component={EditProfile} />
+        <Route path="*">
+          <Redirect to='/' />
+        </Route>
       </Switch>
     </Router>
   );

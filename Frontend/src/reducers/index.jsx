@@ -4,12 +4,16 @@ import { withReduxStateSync } from 'redux-state-sync';
 import { combineReducers } from "redux";
 import loginReducer from "./login";
 import userReducer from "./user";
+import showFormReducer from "./showForm";
+import buttonNameReducer from "./buttonName";
 
 const allReducers = combineReducers({
-    counter: counterReducer,
-    loginReducer: loginReducer,
-    userReducer: userReducer,
-    routerReducer: routerReducer
+  counter: counterReducer,
+  loginReducer: loginReducer,
+  showFormReducer: showFormReducer,
+  buttonNameReducer: buttonNameReducer,
+  userReducer: userReducer,
+  routerReducer: routerReducer
 })
 const rootReducer = (state, action) => {
   // when a logout action is dispatched it will reset redux state

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { modifyName } from "../../actions"
+import { modifyName, showForm, buttonName, classButton } from "../../actions"
 import NavMain from '../NavMain'
 import Footer from '../Footer'
-//import Home from '../../pages/Home'
 import { history } from '../../App'
+//import showFormReducer from '../../reducers/showForm'
 
 function UserProfile() {
     const dispatch = useDispatch();
@@ -22,8 +22,13 @@ function UserProfile() {
     const firstName = useSelector(state => state.userReducer.firstName)
     const lastName = useSelector(state => state.userReducer.lastName)
     //const id = useSelector(state => state.userReducer.id)
-    const [showForm, setShowForm] = useState(true)
-    const[classButton, setClassButton] = useState(false)
+    //const [showForm, setShowForm] = useState(true)
+    const showFormState = useSelector(state => state.showFormReducer)
+
+    //const [classButton, setClassButton] = useState(false)
+    const classButtonState = useSelector(state => state.classButtonReducer)
+    //const [buttonName, setButtonName] = useState(true)
+    const buttonNameState = useSelector(state => state.buttonNameReducer)
 
     const validate = () => {
 
@@ -49,9 +54,13 @@ function UserProfile() {
         document.title = `Argent Bank - ${firstName} ${lastName}`
     }, [firstName, lastName])
 
-    const handleClick = () => {
-        setShowForm(prevState => !prevState)
-        setClassButton(prevState => !prevState)
+    const handleClick = (evt) => {
+        //setShowForm(prevState => !prevState)
+        dispatch(showForm())
+        //setClassButton(prevState => !prevState)
+        dispatch(classButton())
+        //setButtonName(prevState => !prevState)
+        dispatch(buttonName())
     }
 
      /*const handleClickEdit = (event) => {
@@ -66,11 +75,9 @@ function UserProfile() {
         history.push('/sign-in')
     }
 
-     /*if(!firstName) {
-        history.push({ pathname: `/` })
-        return <Home />
-    }*/
-
+     if(!firstName) {
+        history.push({ pathname: `/sign-in` })
+    }
     return (
         <>
             <NavMain />
@@ -78,7 +85,7 @@ function UserProfile() {
                 <div className="header">
                     <h1>Welcome back <br />
                         {
-                            showForm ? firstName + ' ' + lastName + ' !' :  firstName + ' ' + lastName + ' !'} 
+                            showFormState ? firstName + ' ' + lastName + ' !' :   
                                 <form className='bloc-form-edit' onSubmit={(e)=>handleSubmit(e)}>
                                     <div className='bloc-name'>
                                         <label htmlFor="firstName">Fisrt Name</label>
@@ -104,10 +111,10 @@ function UserProfile() {
                                     <button className='edit-button' type='submit'>Save</button>
                                     {status && status !== 200 ? <h3 className="error-login">{message}</h3> : null }
                                 </form>
-                        
+                        }
                     </h1>
-                    <button className={`edit-button ${classButton ? "visiblePanel" : "invisiblePanel"}`} onClick={()=>handleClick()}>
-                        Edit Panel
+                    <button className={`edit-button ${classButtonState ? "visiblePanel" : "invisiblePanel"}`} onClick={()=>handleClick()}>
+                        {buttonNameState ? 'Edit Name' : 'Cancel'}
                     </button>
                 </div>
                 <h2 className="sr-only">Accounts</h2>
