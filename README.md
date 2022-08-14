@@ -2,7 +2,7 @@
 ## Openclassrooms P13 : Use an API for Bank user account with React
 # Expected Skills :
 - Implement a state manager in a React application
-- Intéragir avec une API
+- Interact with an API (Application Programming Interfatce)
 - Model an API
 - Authenticate to an API
 
@@ -66,3 +66,4 @@ For some of the dynamic features, like toggling user editing, there is a mock-up
 
 And for the API model that you will be proposing for transactitons, the wireframe can be found in /designs/wireframes/transactions.png.
 ## 2. Frontend
+  In the frontend directory, type npm start to start the frontend app
