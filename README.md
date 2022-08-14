@@ -1,10 +1,10 @@
-Rakotonirina_JeanSebastien_13_03072022
-Openclassrooms P13 : Use an API for Bank user account with React
-Expected Skills :
-Implement a state manager in a React application
-Interact with an API (Application Programming Interfatce)
-Model an API
-Authenticate to an API
+# Rakotonirina_JeanSebastien_13_03072022
+## Openclassrooms P13 : Use an API for Bank user account with React
+#Expected Skills :
+- Implement a state manager in a React application
+- Interact with an API (Application Programming Interfatce)
+- Model an API
+- Authenticate to an API
 Installation
 git clone the repository
 in each directory (fronten and backend), type npm install in vscode terminal console
