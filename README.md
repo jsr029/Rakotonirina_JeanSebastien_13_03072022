@@ -133,3 +133,10 @@ export default showFormReducer
    <div style="width:100%;margin:0 auto">
     <img src="./img/combineReducers.PNG" alt="frontend json package image" />
   </div>
+
+4. useSelector and dispatch react-redux hooks
+
+   <div style="display:flex; flex-direction:row; flex-wrap:wrap">
+    <img src="./img/SignIpart1.PNG" alt="frontend sign-in component header side image" />
+    <img src="./img/SignInPart2.PNG" alt="frontend sign-in component return side package image" />
+  </div>
