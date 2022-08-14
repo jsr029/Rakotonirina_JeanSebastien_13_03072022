@@ -16,6 +16,12 @@ export const showForm = () => {
         type: 'SHOWFORM'
     }
 }
+export const showRememberMe = () => {
+    return {
+        type: 'SHOWREMEMBERME'
+    }
+}
+
 export const buttonName = () => {
     return {
         type: 'BUTTONNAME'
@@ -81,11 +87,12 @@ export const loginUser = (username, password) => {
             url: baseUrl + '/login'
         })
             .then(response => {
+                console.log(response)
                 try {
                     dispatch(loginSuccess(response.data.body.token, response.data.status, response.data.message));
                     dispatch(accessProfile(response.data.body.token));
                 } catch (e) {
-                    dispatch(loginFailure(response.data.status, response.data.message));
+                    dispatch(loginFailure(response.data.status, response.data.message, response.data.showRememberMe));
                 }
             })
             .catch(error => {

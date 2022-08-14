@@ -6,12 +6,14 @@ import loginReducer from "./login";
 import userReducer from "./user";
 import showFormReducer from "./showForm";
 import buttonNameReducer from "./buttonName";
+import showRememberMeReducer from "./showRememberMe";
 
 const allReducers = combineReducers({
   counter: counterReducer,
   loginReducer: loginReducer,
   showFormReducer: showFormReducer,
   buttonNameReducer: buttonNameReducer,
+  showRememberMeReducer : showRememberMeReducer,
   userReducer: userReducer,
   routerReducer: routerReducer
 })
