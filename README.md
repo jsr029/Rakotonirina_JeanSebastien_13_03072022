@@ -83,3 +83,8 @@ I installed
     
  Middleware (intergiciel in french) is like a bridge between the others applications, tools, bdd to give unified services at users.
  
+ # Implement
+   <div style="width:100%;margin:0 auto">
+    <img src="./img/indexAtTheRootDir.PNG" alt="frontend json package image" />
+  </div>
+
