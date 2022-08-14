@@ -67,3 +67,10 @@ For some of the dynamic features, like toggling user editing, there is a mock-up
 And for the API model that you will be proposing for transactitons, the wireframe can be found in /designs/wireframes/transactions.png.
 ## 2. Frontend
   In the frontend directory, type npm start to start the frontend app
+  
+# Implement a state manager in a React application
+I use the Redux library, so according to the frontend package.json : 
+
+  <div style='textalign:center'>
+    <img src="./img/packageJson.png" />
+  </div>
