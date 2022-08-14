@@ -83,8 +83,9 @@ I installed
     
  Middleware (intergiciel in french) is like a bridge between the others applications, tools, bdd to give unified services at users.
  
- # Implement
+ # Implementation
    <div style="width:100%;margin:0 auto">
     <img src="./img/indexAtTheRootDir.PNG" alt="frontend json package image" />
   </div>
 
+First, we need to create the store with createStore redux function, then we wrap the App component by Provider component wich contains the store in its props, and then the magic happens. 
