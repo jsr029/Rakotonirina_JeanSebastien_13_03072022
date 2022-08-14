@@ -72,6 +72,6 @@ And for the API model that you will be proposing for transactitons, the wirefram
 I use the Redux library, so according to the frontend package.json : 
 
   <div style='textalign:center'>
-    <img src="/img/packageJson.png" alt='frontend json package image' />
+    <img src="./img/packageJson.png" alt='frontend json package image' />
   </div>
 
