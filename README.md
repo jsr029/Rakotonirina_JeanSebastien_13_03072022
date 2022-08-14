@@ -83,3 +83,49 @@ I installed
     
  Middleware (intergiciel in french) is like a bridge between the others applications, tools, bdd to give unified services at users.
  
+ # Implementation
+   <div style="width:100%;margin:0 auto">
+    <img src="./img/indexAtTheRootDir.PNG" alt="frontend json package image" />
+  </div>
+
+First, we need to create the store with createStore redux function, then we wrap the App component by Provider component wich contains the store in its props, and then the magic happens. 
+
+1. Actions
+
+We have all actions needed for this app inside ./src/actions/index.jsx
+
+For example, 
+
+export const showForm = () => {
+
+    return {
+    
+        type: 'SHOWFORM'
+        
+    }
+    
+}
+
+2. Reducers 
+
+Each action normally has got a specific reducer function
+
+const showFormReducer = (state=true, action) => {
+
+    switch(action.type){
+    
+        case 'SHOWFORM':
+        
+            return !state 
+            
+        default:
+        
+            return state
+            
+    }
+    
+}
+
+export default showFormReducer
+
+
