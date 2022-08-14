@@ -106,7 +106,7 @@ export const showForm = () => {
     
 }
 
-2. Reducers 
+2. Reducers ./src/reducers/showFormReducer.jsx
 
 Each action normally has got a specific reducer function
 
@@ -128,4 +128,8 @@ const showFormReducer = (state=true, action) => {
 
 export default showFormReducer
 
+3. Combine reducers
 
+   <div style="width:100%;margin:0 auto">
+    <img src="./img/combineReducers.PNG" alt="frontend json package image" />
+  </div>
