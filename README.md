@@ -71,7 +71,15 @@ And for the API model that you will be proposing for transactitons, the wirefram
 # Implement a state manager in a React application
 I use the Redux library, so according to the frontend package.json : 
 
-  <div style='textalign:center'>
-    <img src="./img/packageJson.png" />
+  <div style="width:100%;margin:0 auto">
+    <img src="./img/packageJson.PNG" alt="frontend json package image" />
   </div>
-
+  
+I installed 
+   - "redux": "^4.2.0", the state manager
+   - "redux-devtools-extension": "^2.13.9", Dev tools for chrome
+   - "redux-state-sync": "^3.1.4", A middleware for redux to sync state in different tabs
+   - "redux-thunk": "^2.4.1", Redux Thunk middleware allows you to write action creators that return a function instead of an action. The thunk can be used to delay the dispatch of an action.
+    
+ Middleware (intergiciel in french) is like a bridge between the others applications, tools, bdd to give unified services at users.
+ 
