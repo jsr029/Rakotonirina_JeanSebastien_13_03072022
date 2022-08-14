@@ -137,6 +137,6 @@ export default showFormReducer
 4. useSelector and dispatch react-redux hooks
 
    <div style="display:flex; flex-direction:row; flex-wrap:wrap">
-    <img src="./img/SignInpart1.PNG" alt="frontend sign-in component header side image" />
+    <img src="./img/SignInPart1.PNG" alt="frontend sign-in component header side image" />
     <img src="./img/SignInPart2.PNG" alt="frontend sign-in component return side package image" />
   </div>
