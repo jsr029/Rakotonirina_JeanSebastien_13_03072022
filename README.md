@@ -7,7 +7,11 @@
 - Authenticate to an API
 
 # Installation
-## Backend in the directory named Project-10-Bank-API
+1. git clone the repository
+2. in each directory (fronten and backend), type npm install in vscode terminal console
+3. follow instructions below
+
+## 1. Backend in the directory named Project-10-Bank-API
 Project #10 - Argent Bank API
 This codebase contains the code needed to run the backend for Argent Bank.
 
@@ -61,4 +65,4 @@ Static HTML and CSS has been created for most of the site and is located in: /de
 For some of the dynamic features, like toggling user editing, there is a mock-up for it in /designs/wireframes/edit-user-name.png.
 
 And for the API model that you will be proposing for transactitons, the wireframe can be found in /designs/wireframes/transactions.png.
-## Frontend
+## 2. Frontend
