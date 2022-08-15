@@ -1,4 +1,4 @@
-const showFormReducer = (state=true, action) => {
+const showFormReducer = (state=false, action) => {
     switch(action.type){
         case 'SHOWFORM':
             return !state 
