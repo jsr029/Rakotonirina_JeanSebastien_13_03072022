@@ -75,7 +75,7 @@ export const receiveData = (data, status) => {
     }
 }
 
-export const loginUser = (username, password) => {
+export const loginUser = (username, password, rmb) => {
     return (dispatch) => {
         return axios({
             method: 'POST',
@@ -89,8 +89,23 @@ export const loginUser = (username, password) => {
             .then(response => {
                 console.log(response)
                 try {
-                    dispatch(loginSuccess(response.data.body.token, response.data.status, response.data.message));
-                    dispatch(accessProfile(response.data.body.token));
+                    //if we have a response and if remeber me chexkbox is checked, we stock the token in the localStorae and the store
+                    if(response.data && rmb === true){
+                        dispatch(loginSuccess(response.data.body.token, response.data.status, response.data.message));
+                        dispatch(accessProfile(response.data.body.token));
+                        localStorage.setItem('user', JSON.stringify({
+                            userData:{
+                            token: response.data.body.token, 
+                            email: username, 
+                            password: password
+                            }
+                        }))
+                    }
+                    //if we have a response and if remeber me chexkbox is unchecked, we stock the token only in the store
+                    if(response.data && rmb === false){
+                        dispatch(loginSuccess(response.data.body.token, response.data.status, response.data.message));
+                        dispatch(accessProfile(response.data.body.token));
+                    }
                 } catch (e) {
                     dispatch(loginFailure(response.data.status, response.data.message, response.data.showRememberMe));
                 }

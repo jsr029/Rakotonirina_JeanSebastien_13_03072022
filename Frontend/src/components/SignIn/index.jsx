@@ -13,6 +13,8 @@ function SignIn() {
   const message = useSelector(state => state.loginReducer.message)  
 
   const rmb = useSelector(state => state.showRememberMeReducer)
+  const emailRmb = localStorage.getItem('user')
+  console.log(emailRmb)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -49,7 +51,8 @@ function SignIn() {
     document.title = "Argent Bank - Sign In"
     dispatch(reset())
     }, [dispatch]) 
-  
+
+
     return (
         <>
           <NavMain />
