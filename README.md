@@ -137,6 +137,13 @@ export default showFormReducer
 4. useSelector and dispatch react-redux hooks
 
    <div style="display:flex; flex-direction:row; flex-wrap:wrap">
-    <img src="./img/SignInPart1.PNG" alt="frontend sign-in component header side image" />
-    <img src="./img/SignInPart2.PNG" alt="frontend sign-in component return side package image" />
+    <img src="./img/UserProfilePart1.PNG" alt="frontend sign-in component header side image" />
+  
+    We import showFrom from ./src/actions/index.jsx, and showFormState comes from useSelector (the store).
+  
+    <img src="./img/UserProfilePart2.PNG" alt="frontend sign-in component return side package image" />
+  
+    We use dispatch(showForm()) in the handleClick function to fire the action.
+    <img src="./img/UserProfilePart3.PNG" alt="frontend sign-in component return side package image" />
+    Finally, with this ternary showFormState ? firstName + ' ' + lastName + ' !' : etc... , we have the final state depends on the click edit name button.
   </div>
