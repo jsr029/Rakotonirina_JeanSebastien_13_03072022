@@ -1,0 +1,682 @@
+openapi: 3.0.0
+info:
+  version: '2.0.0'
+  title: Swagger Bank Argent API - OpenAPI 3.0 documentation
+  termsOfService: 'http://swagger.io/terms/'
+  description: |-
+    Contains all available API endpoints in this codebase
+  contact:
+    email: jsr059@gmail.com
+  license:
+    name: MIT
+servers:
+  - url: 'localhost:27017/api/v1'
+  - url: 'localhost:3001/api/v1'
+paths:
+  /user/login:
+    post:
+      security: [
+      ]    
+      summary: 'Logs user in the sytem'
+      description: API for Login
+      operationId: loginUser
+      tags:
+        - User Module
+      parameters:
+        - name: email
+          in: query
+          description: user email 
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: user password 
+          required: true
+          schema:
+            type: string
+        - name: body
+          in: query
+          description: Login Payload
+          required: true
+          schema:
+            $ref: '#/components/schemas/Login'
+            produces: 
+              - application/json
+      responses:
+        '200':
+          description: 'Login successfully'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /user/signup:
+    post:
+      security: [
+      ]    
+      summary: 'API Signup'
+      operationId: userSignUp
+      tags:
+        - User Module
+      parameters:
+        - name: email
+          in: query
+          description: user email 
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: user password 
+          required: true
+          schema:
+            type: string
+        - name: firstName
+          in: query
+          description: user firstName 
+          required: true
+          schema:
+            type: string
+        - name: lastName
+          in: query
+          description: user lastName 
+          required: true
+          schema:
+            type: string
+        - name: body
+          in: query
+          description: SignUp Payload
+          required: true
+          schema:
+            $ref: '#/components/schemas/User'
+            produces: 
+              - application/json
+      responses:
+        '200':
+          description: 'Signup succesfully'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /user/profile:
+    post:
+      security:
+        - Bearer: []
+      summary: 'User Profile API'
+      operationId: userProfile
+      tags:
+        - User Module
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token 
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: 'User Profile retrieved succesfully'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+    put:
+      security:
+        - Bearer: []
+      summary: 'User Profile API'
+      description: API for updating a user profile
+      operationId: userUpdateProfile
+      tags:
+        - User Module
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token 
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: 'Signup succesfully'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+    delete:
+      security:
+        - Bearer: []
+      summary: 'User Profile API'
+      description: API for deleting a user profile
+      operationId: userDeleteProfile
+      tags:
+        - User Module
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token 
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: 'User account deleted succesfully'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /user/transactions/{Month}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: 'Gets Transactions per Month API'
+      operationId: transactionsPerMonthId
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token 
+          required: true
+          schema: 
+            type: string
+        - name: Month
+          in: path
+          description: Month path parameter 
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: 'User transactions per Month retrieved succesfully'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionsResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /user/transaction/{Id}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: 'Gets Transactions per Id API'
+      operationId: transactionsPerId
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token 
+          required: true
+          schema: 
+            type: string
+        - name: Id
+          in: path
+          description: Id path parameter 
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: 'User transactions per Id retrieved succesfully'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionsResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: 'Updates Transaction per Id API'
+      operationId: updateransactionsPerId
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token 
+          required: true
+          schema: 
+            type: string
+        - name: Id
+          in: path
+          description: Id path parameter 
+          required: true
+          schema: 
+            type: string
+            $ref: '#/components/schemas/Transactions'
+      responses:
+        '200':
+          description: 'User transaction per Id updated succesfully'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: 'delete Transactions per Id API'
+      operationId: deleteTransactionsPerId
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token 
+          required: true
+          schema: 
+            type: string
+        - name: Id
+          in: path
+          description: Id path parameter 
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: 'User transaction per Id deleted succesfully'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /argentbank/inventory:
+    get:
+      tags:
+        - ArgentBank Module
+      security:
+        - Bearer: []
+      summary: Returns list of transaction per user
+      description: Returns a map of transactions
+      operationId: getInventory
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token 
+          required: true
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/ArgentBankResponse'
+  /argentbank/order:
+    post:
+      tags:
+        - ArgentBank Module
+      security:
+      - Bearer: []
+      summary: Place an order for a transaction
+      description: Place a new order in the argentbank
+      operationId: placeOrder
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token 
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transactions'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+        '405':
+          description: Invalid input
+  /argentbank/order/{orderId}:
+    get:
+      tags:
+        - ArgentBank Module
+      security:
+        - Bearer: []      
+      summary: Find operation order by ID
+      description: For valid response try integer IDs with value <= 5 or > 10. Other values will generate exceptions.
+      operationId: getOrderById
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token 
+          required: true
+          schema:
+            type: string
+        - name: orderId
+          in: path
+          description: ID of order that needs to be fetched
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'          
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Order not found
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+        - ArgentBank Module
+      security :
+        - Bearer: []
+      summary: Delete operation order by ID
+      description: For valid response try integer IDs with value < 1000. Anything above 1000 or nonintegers will generate API errors
+      operationId: deleteOrder
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token 
+          required: true
+          schema:
+            type: string
+        - name: orderId
+          in: path
+          description: ID of the order that needs to be deleted
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Order deleted successfully
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Order not found
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - email
+        - password
+      properties:
+        firstName:
+          type: string
+          example: Steve
+        lastName:
+          type: string
+          example: Rogers
+        email:
+          type: string
+          example: steve@rogers.com
+        password:
+          type: string
+          example: password456
+    Login:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    Profile:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    LoginResponse:
+      type: object
+      required:
+        - token
+      properties:
+        token:
+          type: string
+    ArgentBankResponse:
+      type: object
+      required:
+        - userData
+      properties:
+        userData:
+          type: object
+          properties:
+            user:
+              type: object
+              properties:
+                id:
+                  type: string
+                firstName:
+                  type: string
+                  example: Tony
+                lastName:
+                  type: string
+                  example: Stark
+                email:
+                  type: string
+                  example: tony@stark.com
+                password:
+                  type: string
+                  example: password123
+            Transactions:
+              type: object
+              properties:
+                trans0: 
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                      example: Achat CB
+                    origin:
+                      type: string
+                      example: FNAC
+                    amount:
+                      type: string
+                      example: -30,75€
+                    created:
+                      type: object
+                      properties:
+                        day:
+                          type: integer
+                          example: 2
+                        month:
+                          type: integer
+                          example: 3
+                        year:
+                          type: integer
+                          example: 2022
+                        time: 
+                          type: string
+                          example: 08:45:06
+                trans1:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    title:
+                      type: string
+                      example: Virement reçu
+                    origin:
+                      type: string
+                      example: Web Agency The GoldenLions
+                    amount:
+                      type: string
+                      example: +3375,88€
+                    created:
+                      type: object
+                      properties:
+                        day:
+                          type: integer
+                          example: 1
+                        month:
+                          type: integer
+                          example: 8
+                        year:
+                          type: integer
+                          example: 2022
+                        time: 
+                          type: string
+                          example: 10:12:21
+    Transactions:
+      type: object
+      required:
+        - transactions
+      properties:
+        transactions:
+          type: object
+          properties:
+            trans0: 
+             type: object
+             properties:
+              id:
+                type: integer
+              title:
+                type: string
+              origin:
+                type: string
+              amount:
+                type: string
+              created:
+                type: object
+                properties:
+                  day:
+                    type: integer
+                  month:
+                    type: integer
+                  year:
+                    type: integer
+                  time: 
+                    type: string
+    TransactionsResponse:
+      type: object
+      required:
+        - status
+        - message
+        - body
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        body:
+          type: object
+          properties:
+            id:
+              type: string
+            title:
+              type: string
+            amount:
+              type: integer
+              format: int64
+            created:
+              type: object
+              properties:
+                day:
+                  type: integer
+                month:
+                  type: integer
+                year: 
+                  type: integer
+    ApiResponse:
+      type: object
+      required:
+        - status
+        - message
+        - body
+      properties:
+        status:
+          type: integer
+        message: 
+          type: string
+        body:
+          type: object
+          properties:
+            token:
+              type: string
+    Order:
+      type: object
+      properties:
+        trans0: 
+          type: object
+          properties:
+            id:
+              type: integer
+            title:
+              type: string
+              example: Achat CB
+            origin:
+              type: string
+              example: FNAC
+            amount:
+              type: string
+              example: -30,75€
+            created:
+              type: object
+              properties:
+                day:
+                  type: integer
+                  example: 2
+                month:
+                  type: integer
+                  example: 3
+                year:
+                  type: integer
+                  example: 2022
+                time: 
+                  type: string
+                  example: 08:45:06
+        status:
+          type: string
+          description: Order Status
+          example: approved
+          enum:
+            - placed
+            - approved
+            - delivered
+        complete:
+          type: boolean
+      xml:
+        name: order
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: basic
+security:
+  - Bearer: []

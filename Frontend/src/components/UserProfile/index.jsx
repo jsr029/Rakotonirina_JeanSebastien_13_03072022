@@ -94,7 +94,7 @@ function UserProfile() {
                                             id='firstName'
                                             name='firstName'
                                             placeholder={firstName}
-                                            value={newFirstName}
+                                            value={newFirstName ? newFirstName : firstName}
                                             onChange={(event) => setNewFirstName(event.target.value)}
                                         />
                                         {newFirstNameError ? <div className="form-error">{newFirstNameError}</div> : null}
@@ -104,6 +104,7 @@ function UserProfile() {
                                             id='lastName'
                                             name='lastName'
                                             placeholder={lastName}
+                                            value={newLastName ? newLastName : lastName}
                                             onChange={(event) => setNewLastName(event.target.value)}
                                         />
                                         {newLastNameError ? <div className="form-error">{newLastNameError}</div> : null}

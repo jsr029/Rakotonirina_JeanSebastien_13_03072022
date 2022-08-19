@@ -116,7 +116,7 @@ paths:
       - User Transactions
       summary: Get all transactions per month
       description: Get informations about transactions per month
-      operationId: getTransactionPerMonth
+      operationId: getTransactionsPerMonth
       consumes:
       - application/json
       produces:
@@ -228,6 +228,32 @@ definitions:
       password:
         type: string
         description: user password
+  LoginResponse:
+    type: object
+    properties:
+      token:
+        type: string
+  UserProfile:
+    type: object
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+  ApiResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+      body:
+        type: object
+        properties:
+          id:
+            type: string
+          email:
+            type: string
   TransactionsPerMonth:
     type: object
     properties:
@@ -260,29 +286,16 @@ definitions:
       created:
         type: string
         description: transaction date created
-  ApiResponse:
-    type: object
+  Transaction:
+    type: "object"
     properties:
-      status:
-        type: integer
-      message:
-        type: string
-      body:
-        type: object
-        properties:
-          id:
-            type: string
-          email:
-            type: string
-  LoginResponse:
-    type: object
-    properties:
-      token:
-        type: string
-  UserProfile:
-    type: object
-    properties:
-      firstName:
-        type: string
-      lastName:
-        type: string
+      id:
+        type: "integer"
+      sum:
+        type: "integer"
+      label:
+        type: "string"
+      location:
+        type: "string"
+      date:
+        type: "string"
