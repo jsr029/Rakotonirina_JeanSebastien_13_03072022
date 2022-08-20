@@ -106,11 +106,11 @@ export const showForm = () => {
     
 }
 
-2. Reducers ./src/reducers/showFormReducer.jsx
+  2. Reducers ./src/reducers/showFormReducer.jsx
 
-Each action normally has got a specific reducer function
+  Each action normally has got a specific reducer function
 
-const showFormReducer = (state=true, action) => {
+  const showFormReducer = (state=true, action) => {
 
     switch(action.type){
     
@@ -128,13 +128,13 @@ const showFormReducer = (state=true, action) => {
 
 export default showFormReducer
 
-3. Combine reducers
+  3. Combine reducers
 
    <div style="width:100%;margin:0 auto">
     <img src="./img/combineReducers.PNG" alt="frontend json package image" />
   </div>
 
-4. useSelector and dispatch react-redux hooks
+  4. useSelector and dispatch react-redux hooks
 
    <div style="display:flex; flex-direction:row; flex-wrap:wrap">
     <img src="./img/UserProfilePart1.PNG" alt="frontend sign-in component header side image" />
@@ -147,3 +147,6 @@ export default showFormReducer
     <img src="./img/UserProfilePart3.PNG" alt="frontend sign-in component return side package image" />
     Finally, with this ternary showFormState ? firstName + ' ' + lastName + ' !' : etc... , we have the final state depends on the click edit name button.
   </div>
+  # Model an API
+  
+  <img src="openapi.yaml" alt="Swagger" />
