@@ -665,11 +665,12 @@ components:
         status:
           type: string
           description: Order Status
-          example: approved
+          example: pending
           enum:
-            - placed
-            - approved
-            - delivered
+            - paid
+            - pending
+            - created
+            - failed
         complete:
           type: boolean
       xml:
