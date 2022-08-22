@@ -12,10 +12,12 @@ function SignIn() {
   const status = useSelector(state => state.loginReducer.status)
   const message = useSelector(state => state.loginReducer.message)  
 
-  const rmb = useSelector(state => state.showRememberMeReducer)
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const rmb = useSelector(state => state.showRememberMeReducer)
+  const userEmail = JSON.parse(localStorage.getItem('user')).userData.email || email
+  const userPassword= JSON.parse(localStorage.getItem('user')).userData.password || password
 
   const [passwordError, setPasswordError] = useState('')
   const [emailError, setEmailError] = useState('')
@@ -49,8 +51,8 @@ function SignIn() {
     document.title = "Argent Bank - Sign In"
     dispatch(reset())
     }, [dispatch]) 
-
-
+    
+    
     return (
         <>
           <NavMain />
@@ -62,11 +64,10 @@ function SignIn() {
                     <div className="input-wrapper">
                         <label htmlFor="email">Email</label>
                         <input
-                            placeholder="Email"
                             name="email"
                             type="email"
                             id="email"
-                            value={email}
+                            value={rmb ? userEmail : ''}
                             onChange={(event) => setEmail(event.target.value)}
                         />
                         { emailError ? <div className="form-error">{emailError}</div> : null  }  
@@ -74,11 +75,10 @@ function SignIn() {
                     <div className="input-wrapper">
                         <label htmlFor="password">Password</label>
                         <input
-                            placeholder="Password"
                             name="password"
                             type="password"
                             id="password"
-                            value={password}
+                            value={rmb ? userPassword : ''}
                             onChange={(event) => setPassword(event.target.value)}
                         />
                         { passwordError ? <div className="form-error">{passwordError}</div> : null  }  
