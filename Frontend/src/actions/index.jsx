@@ -93,6 +93,7 @@ export const loginUser = (username, password, rmb) => {
                     if(response.data && rmb === true){
                         dispatch(loginSuccess(response.data.body.token, response.data.status, response.data.message));
                         dispatch(accessProfile(response.data.body.token));
+                        localStorage.removeItem('user')
                         localStorage.setItem('user', JSON.stringify({
                             userData:{
                             token: response.data.body.token, 
@@ -105,6 +106,14 @@ export const loginUser = (username, password, rmb) => {
                     if(response.data && rmb === false){
                         dispatch(loginSuccess(response.data.body.token, response.data.status, response.data.message));
                         dispatch(accessProfile(response.data.body.token));
+                        localStorage.removeItem('user')
+                        localStorage.setItem('user', JSON.stringify({
+                            userData:{
+                                token:'',
+                                email: '',
+                                password: ''
+                            }
+                        }))
                     }
                 } catch (e) {
                     dispatch(loginFailure(response.data.status, response.data.message, response.data.showRememberMe));

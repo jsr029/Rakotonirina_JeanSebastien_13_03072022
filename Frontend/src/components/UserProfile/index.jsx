@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch  } from 'react-redux'
 import { modifyName, showForm, buttonName, classButton } from "../../actions"
 import NavMain from '../NavMain'
 import Footer from '../Footer'
