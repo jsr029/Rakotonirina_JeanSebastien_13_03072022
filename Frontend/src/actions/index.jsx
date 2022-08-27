@@ -90,6 +90,7 @@ export const loginUser = (username, password, rmb) => {
             .then(response => {
                 console.log(response)
                 try {
+                    toast.success('User is logged in.')
                     //if we have a response and if remeber me chexkbox is checked, we stock the token in the localStorae and the store
                     if(response.data && rmb === true){
                         dispatch(loginSuccess(response.data.body.token, response.data.status, response.data.message));
@@ -119,14 +120,14 @@ export const loginUser = (username, password, rmb) => {
                       toast.success('Checkbox Remember Me is unchecked')
                     }
                 } catch (e) {
-                    toast.error(`${response.data.message}`)
-                    //console.clear()
+                    toast.error('Your email or password is incorrect')
+                    console.clear()
                     dispatch(loginFailure(response.data.status, response.data.message, response.data.showRememberMe));
                 }
             })
             .catch(error => {
-                toast.error(`${error}`)
-                //console.clear()
+                toast.error('Your IDs are not valid. Please retry !')
+                console.clear()
                 dispatch(loginFailure(error));
             })
     }
@@ -147,11 +148,13 @@ export const accessProfile = (token) => {
         })
             .then(response => {
                 console.log(response.data)
+                toast.success('You can access to your profile and redirect by EditProfile component !')
                 dispatch(receiveData(response.data.body, response.data.status));
                 history.push(`/user/${(response.data.body.firstName).toLowerCase()}`);
             })
             .catch(error => {
                 if (error.status === 401) {
+                    toast.error('You can not access to your profile. Check accessProfile action !')
                     dispatch(loginFailure(error));
                 }
             })
@@ -173,13 +176,13 @@ export const modifyName = (token, newFirstName, newLastName) => {
             url: baseUrl + '/profile'
         })
             .then(response => {
-                console.log(response)
+                toast.success('Names have been successfully modified !')
                 dispatch(receiveData(response.data.body, response.data.status));
                 dispatch(logoutRequest());
                 history.push(`/sign-in`);
             })
             .catch(error => {
-                console.log(error)
+                toast.error('Names have not been modified. Check modifyName actions !')
                 if (error.response.status !== 200) {
                     dispatch(loginFailure(error))
                 }
@@ -204,14 +207,17 @@ export const signUpUser = (email, password, firstName, lastName) => {
         })
             .then(response => {
                 if (response.data.status === 200) {
+                    toast.success('User has been added.')
                     dispatch(logoutRequest())
                     history.push(`/sign-in`);
                 } else {
+                    toast.error('The response status is 200, but User has not been added.')
                     dispatch(loginFailure(response.data.status, response.data.message));
                 }
             })
             .catch(error => {
                 if (error.response.status !== 200) {
+                    toast.error('The response status is not 200. User has not been added.')
                     dispatch(loginFailure(error))
                 }
             })
