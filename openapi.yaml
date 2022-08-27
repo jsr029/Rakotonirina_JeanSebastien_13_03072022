@@ -275,26 +275,23 @@ components:
           example: password456
     Profile:
       type: object
-      required:
-        - email
-        - password
       properties:
         email:
           type: string
+          example: tony@stark.com
+          description: user email
         password:
           type: string
+          example: password123
+          description: user password
     LoginResponse:
       type: object
-      required:
-        - token
       properties:
         token:
           type: string
 
     Transactions:
       type: object
-      required:
-        - transactions
       properties:
         transactions:
           type: object
@@ -323,10 +320,6 @@ components:
                     type: string
     TransactionsResponse:
       type: object
-      required:
-        - status
-        - message
-        - body
       properties:
         status:
           type: integer
@@ -353,10 +346,6 @@ components:
                   type: integer
     ApiResponse:
       type: object
-      required:
-        - status
-        - message
-        - body
       properties:
         status:
           type: integer
@@ -365,9 +354,10 @@ components:
         body:
           type: object
           properties:
-            token:
+            id:
               type: string
-
+            email:
+              type: string
   securitySchemes:
     Bearer:
       type: http
