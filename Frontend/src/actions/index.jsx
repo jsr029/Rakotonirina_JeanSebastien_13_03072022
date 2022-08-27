@@ -1,5 +1,6 @@
 import { history, baseUrl } from "../App"
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 export const increment = () => {
     return {
@@ -101,6 +102,7 @@ export const loginUser = (username, password, rmb) => {
                             password: password
                             }
                         }))
+                        toast.success('Checkbox Remember Me is checked')
                     }
                     //if we have a response and if remeber me chexkbox is unchecked, we stock the token only in the store
                     if(response.data && rmb === false){
@@ -114,12 +116,17 @@ export const loginUser = (username, password, rmb) => {
                                 password: ''
                             }
                         }))
+                      toast.success('Checkbox Remember Me is unchecked')
                     }
                 } catch (e) {
+                    toast.error(`${response.data.message}`)
+                    //console.clear()
                     dispatch(loginFailure(response.data.status, response.data.message, response.data.showRememberMe));
                 }
             })
             .catch(error => {
+                toast.error(`${error}`)
+                //console.clear()
                 dispatch(loginFailure(error));
             })
     }

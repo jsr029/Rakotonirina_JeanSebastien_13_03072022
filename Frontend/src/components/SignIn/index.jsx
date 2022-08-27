@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { loginUser, reset, showRememberMe } from '../../actions'
 import Footer from '../Footer'
 import NavMain from '../NavMain'
@@ -24,8 +25,15 @@ function SignIn() {
 
     let emailErrorMessage = ''
     let passwordErrorMessage = ''
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
 
-    if (!email) { emailErrorMessage = 'Please, enter your email.' }
+    if (!email) { 
+      emailErrorMessage = 'Please, enter your email.'
+      toast.error(`${emailErrorMessage}`)
+    }
+    if (!regex.test(email)){
+      toast.error('Email is an invalid format')
+    }
     if (email && !email.includes('@')) { emailErrorMessage = 'Please, enter a valid email.' }
     if (!password) { passwordErrorMessage = 'Please, enter your password.' }
     if (passwordErrorMessage || emailErrorMessage) {
