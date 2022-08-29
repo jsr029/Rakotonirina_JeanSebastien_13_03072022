@@ -289,7 +289,6 @@ components:
       properties:
         token:
           type: string
-
     Transactions:
       type: object
       properties:
