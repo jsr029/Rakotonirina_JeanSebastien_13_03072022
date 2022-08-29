@@ -30,6 +30,11 @@ function UserProfile() {
     //const [buttonName, setButtonName] = useState(true)
     const buttonNameState = useSelector(state => state.buttonNameReducer)
 
+    //if token, display names, else redirect login
+        if(localStorage.getItem('user')){
+            const localdata = JSON.parse(localStorage.getItem('user'))
+            console.log(localdata.userData)
+        }
     const validate = () => {
 
         let newFisrtNameErrorMessage = '';
@@ -78,6 +83,7 @@ function UserProfile() {
      if(!firstName) {
         history.push({ pathname: `/sign-in` })
     }
+
     return (
         <>
             <NavMain />

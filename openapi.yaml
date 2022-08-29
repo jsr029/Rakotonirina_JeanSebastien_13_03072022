@@ -186,7 +186,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TransactionsResponse'
+                type: array 
+                items: 
+                  $ref: '#/components/schemas/TransactionsResponse'
         '400':
           description: Invalid Fields
         '500':

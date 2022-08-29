@@ -59,7 +59,6 @@ function EditProfile() {
    
     const handleSubmit = (event) => {
         event.preventDefault();
-
         const isFormValid = validate();
         if(isFormValid) dispatch(modifyName(token, newFirstName, newLastName, newEmail, newPassword));
     }
