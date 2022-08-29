@@ -296,28 +296,21 @@ components:
         transactions:
           type: object
           properties:
-            trans0: 
-             type: object
-             properties:
-              id:
-                type: integer
-              title:
-                type: string
-              origin:
-                type: string
-              amount:
-                type: string
-              created:
-                type: object
-                properties:
-                  day:
-                    type: integer
-                  month:
-                    type: integer
-                  year:
-                    type: integer
-                  time: 
-                    type: string
+            title:
+              type: string
+            origin:
+              type: string
+            amount:
+              type: string
+              format: integer
+            created:
+              type: string
+              description: created date
+              example: 28/10/22
+              pattern: DD/MM/YYYY
+              format: date
+              minLength: 0
+              maxLength: 10
     TransactionsResponse:
       type: object
       properties:
