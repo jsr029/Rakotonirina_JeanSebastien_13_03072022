@@ -292,24 +292,21 @@ components:
     Transactions:
       type: object
       properties:
-        transactions:
-          type: object
-          properties:
-            title:
-              type: string
-            origin:
-              type: string
-            amount:
-              type: string
-              format: integer
-            created:
-              type: string
-              description: created date
-              example: 28/10/22
-              pattern: DD/MM/YYYY
-              format: date
-              minLength: 0
-              maxLength: 10
+        title:
+          type: string
+        origin:
+          type: string
+        amount:
+          type: string
+          format: integer
+        created:
+          type: string
+          description: created date
+          example: 28/10/22
+          pattern: DD/MM/YYYY
+          format: date
+          minLength: 0
+          maxLength: 10
     TransactionsResponse:
       type: object
       properties:
@@ -328,14 +325,13 @@ components:
               type: integer
               format: int64
             created:
-              type: object
-              properties:
-                day:
-                  type: integer
-                month:
-                  type: integer
-                year: 
-                  type: integer
+              type: string
+              description: created date
+              example: 28/10/22
+              pattern: DD/MM/YYYY
+              format: date
+              minLength: 0
+              maxLength: 10
     ApiResponse:
       type: object
       properties:
