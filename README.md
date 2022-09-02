@@ -168,4 +168,4 @@ openApi is a way to "draw" or model (modelize?) the API.
     <img src="./img/openApi.png" alt="Swagger" />
   </div>
 
-This a schema of what are the possible requests or/and possible responses from the API
+This is a kind of schema about what are the possible requests or/and possible responses from the API
