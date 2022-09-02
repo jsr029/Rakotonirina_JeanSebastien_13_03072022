@@ -156,6 +156,16 @@ export default showFormReducer
 
 # Model an API
 
+Thanks to Postman, I can easely build my swagger (openapi new version of swagger).
+
+  <div>
+    <img src="./img/postman.PNG" alt="Swagger" />
+  </div>
+
+openApi is a way to "draw" or model (modelize?) the API.
+
   <div>
     <img src="./img/openApi.png" alt="Swagger" />
   </div>
+
+This a schema of what are the possible requests or/and possible responses from the API
