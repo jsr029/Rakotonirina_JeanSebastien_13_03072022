@@ -147,6 +147,7 @@ export default showFormReducer
   </div>
   
     We use dispatch(showForm()) in the handleClick function to fire the action.
+    
     <div>
     <img src="./img/UserProfilePart3.PNG" alt="frontend sign-in component return side package image" />
     </div>
