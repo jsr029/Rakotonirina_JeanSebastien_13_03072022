@@ -157,5 +157,5 @@ export default showFormReducer
 # Model an API
 
   <div>
-    <img src="openApi.png" alt="Swagger" />
+    <img src="./img/openApi.png" alt="Swagger" />
   </div>
