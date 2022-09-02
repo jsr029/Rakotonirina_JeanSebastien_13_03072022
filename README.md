@@ -155,5 +155,7 @@ export default showFormReducer
     Finally, with this ternary showFormState ? firstName + ' ' + lastName + ' !' : etc... , we have the final state depends on the click edit name button.
 
 # Model an API
-  
-  <img src="openapi.yaml" alt="Swagger" />
+
+  <div>
+    <img src="openApi.png" alt="Swagger" />
+  </div>
