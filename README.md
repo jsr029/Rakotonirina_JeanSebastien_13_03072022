@@ -142,7 +142,9 @@ export default showFormReducer
   
     We import showFrom from ./src/actions/index.jsx, and showFormState comes from useSelector (the store).
   
+  <div>
     <img src="./img/UserProfilePart2.PNG" alt="frontend sign-in component return side package image" />
+  </div>
   
     We use dispatch(showForm()) in the handleClick function to fire the action.
     
