@@ -135,8 +135,6 @@ export default showFormReducer
   </div>
 
   4. useSelector and dispatch react-redux hooks
-
-   <div style="display:flex; flex-direction:row; flex-wrap:wrap">
    
     <img src="./img/UserProfilePart1.PNG" alt="frontend sign-in component header side image" />
   
@@ -149,7 +147,7 @@ export default showFormReducer
     <img src="./img/UserProfilePart3.PNG" alt="frontend sign-in component return side package image" />
     
     Finally, with this ternary showFormState ? firstName + ' ' + lastName + ' !' : etc... , we have the final state depends on the click edit name button.
-  </div>
-  # Model an API
+
+# Model an API
   
   <img src="openapi.yaml" alt="Swagger" />
