@@ -88,7 +88,7 @@ export const loginUser = (username, password, rmb) => {
             url: baseUrl + '/login'
         })
             .then(response => {
-                //console.log(response)
+                console.log(response)
                 try {
                     toast.success('User is logged in.')
                     //if we have a response and if remeber me chexkbox is checked, we stock the token in the localStorae and the store
@@ -97,9 +97,11 @@ export const loginUser = (username, password, rmb) => {
                         dispatch(accessProfile(response.data.body.token));
                         localStorage.removeItem('user')
                         localStorage.setItem('user', JSON.stringify({
+                            userData:{
                             token: response.data.body.token, 
                             email: username, 
                             password: password
+                            }
                         }))
                         toast.success('Checkbox Remember Me is checked')
                     }
@@ -109,9 +111,11 @@ export const loginUser = (username, password, rmb) => {
                         dispatch(accessProfile(response.data.body.token));
                         localStorage.removeItem('user')
                         localStorage.setItem('user', JSON.stringify({
+                            userData:{
                                 token:'',
                                 email: '',
                                 password: ''
+                            }
                         }))
                       toast.success('Checkbox Remember Me is unchecked')
                     }
@@ -143,10 +147,11 @@ export const accessProfile = (token) => {
             url: baseUrl + '/profile'
         })
             .then(response => {
-                //console.log(response.data)
+                console.log(response.data)
                 toast.success('You can access to your profile and redirect by EditProfile component !')
                 dispatch(receiveData(response.data.body, response.data.status));
-                history.push(`/user/${(response.data.body.firstName).toLowerCase()}`);
+                //history.push(`/user/${(response.data.body.firstName).toLowerCase()}`);
+                history.push(`/user`);
             })
             .catch(error => {
                 if (error.status === 401) {
@@ -176,7 +181,8 @@ export const modifyName = (token, newFirstName, newLastName) => {
                 dispatch(receiveData(response.data.body, response.data.status));
                 dispatch(showForm())
                 //dispatch(logoutRequest());
-                history.push(`/user/${(response.data.body.firstName).toLowerCase()}`);
+                //history.push(`/user/${(response.data.body.firstName).toLowerCase()}`);
+                history.push(`/user`);
             })
             .catch(error => {
                 toast.error('Names have not been modified. Check modifyName actions !')

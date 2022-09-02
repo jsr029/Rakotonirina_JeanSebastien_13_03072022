@@ -30,11 +30,6 @@ function UserProfile() {
     //const [buttonName, setButtonName] = useState(true)
     const buttonNameState = useSelector(state => state.buttonNameReducer)
 
-    //if token, display names, else redirect login
-        if(localStorage.getItem('user')){
-            const localdata = JSON.parse(localStorage.getItem('user'))
-            console.log(localdata.userData)
-        }
     const validate = () => {
 
         let newFisrtNameErrorMessage = '';
@@ -76,7 +71,9 @@ function UserProfile() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const isFormValid = validate();
-        if (isFormValid) dispatch(modifyName(token, newFirstName, newLastName));
+        if (isFormValid) {
+            dispatch(modifyName(token, newFirstName, newLastName)
+            )}
         history.push('/sign-in')
     }
 
