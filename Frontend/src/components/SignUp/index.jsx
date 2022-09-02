@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import {  useForm } from "react-hook-form";
 import { ErrorMessage } from '@hookform/error-message';
 import { signUpUser, reset } from '../../actions'
+import { toast } from 'react-toastify';
 
 function SignUp() {
 
@@ -19,7 +20,7 @@ function SignUp() {
         if(data.password === data.repeatPassword) {
         dispatch(signUpUser(data.email, data.password, data.firstName, data.lastName))
         }else{
-            alert('Passwords not matched')
+            toast.error('Passwords mismacthed')
         }
     }
 
