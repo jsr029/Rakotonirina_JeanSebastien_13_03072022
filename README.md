@@ -136,7 +136,9 @@ export default showFormReducer
 
   4. useSelector and dispatch react-redux hooks
    
+   <div>
     <img src="./img/UserProfilePart1.PNG" alt="frontend sign-in component header side image" />
+  </div>
   
     We import showFrom from ./src/actions/index.jsx, and showFormState comes from useSelector (the store).
   
