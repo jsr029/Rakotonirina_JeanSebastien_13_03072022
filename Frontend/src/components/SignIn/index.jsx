@@ -4,6 +4,7 @@ import {  useForm } from "react-hook-form";
 import { ErrorMessage } from '@hookform/error-message';
 import { Link } from 'react-router-dom'
 import { loginUser, reset, showRememberMe } from '../../actions'
+import { history } from '../../App';
 import Footer from '../Footer'
 import NavMain from '../NavMain'
 
@@ -19,8 +20,10 @@ function SignIn() {
 
   const handleClick = (e) => {
     dispatch(showRememberMe())
+    history.push('/user')
   }
   const onSubmit = (data) => {
+    console.log(data)
     dispatch(loginUser(data.email, data.password, data.rememberMe))
   }
   
@@ -59,7 +62,6 @@ function SignIn() {
               <input 
                 type="checkbox" 
                 id="rememberMe" 
-                value={rmb ? "true" : "false"} onClick={(e) => handleClick(e)} 
                 {...register('rememberMe')}
               />
               <label htmlFor="remember-me">Remember me</label>

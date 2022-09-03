@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useForm } from "react-hook-form";
+import { useEffect, useState } from 'react'
+import { useSelector, useDispatch  } from 'react-redux'
+import {  useForm } from "react-hook-form";
 import { ErrorMessage } from '@hookform/error-message';
 import { modifyName, showForm, buttonName, classButton } from "../../actions"
 import NavMain from '../NavMain'
@@ -10,37 +10,76 @@ import { history } from '../../App'
 
 function UserProfile() {
     const dispatch = useDispatch();
-    const { formState: { errors }, register, handleSubmit } = useForm();
 
     const status = useSelector(state => state.loginReducer.status);
     const message = useSelector(state => state.loginReducer.message);
 
+    const token = useSelector(state => state.loginReducer.token);
+    const [newFirstName, setNewFirstName] = useState('');
+    const [newLastName, setNewLastName] = useState('');
+
+    const [newFirstNameError, setNewFirstNameError] = useState('');
+    const [newLastNameError, setNewLastNameError] = useState('');
+
     const firstName = useSelector(state => state.userReducer.firstName)
     const lastName = useSelector(state => state.userReducer.lastName)
-
+    //const id = useSelector(state => state.userReducer.id)
+    //const [showForm, setShowForm] = useState(true)
     const showFormState = useSelector(state => state.showFormReducer)
+
+    //const [classButton, setClassButton] = useState(false)
     const classButtonState = useSelector(state => state.classButtonReducer)
+    //const [buttonName, setButtonName] = useState(true)
     const buttonNameState = useSelector(state => state.buttonNameReducer)
 
-    const token = useSelector(state => state.loginReducer.token);
+    const validate = () => {
+
+        let newFisrtNameErrorMessage = '';
+        let newLastNameErrorMessage = '';
+
+        if (!newFirstName) { newFisrtNameErrorMessage = 'This field cannot be left empty.' };
+        if (!newLastName) { newLastNameErrorMessage = 'This field cannot be left empty.' };
+
+
+        if (newFisrtNameErrorMessage ||
+            newLastNameErrorMessage 
+        ) {
+            setNewFirstNameError(newFisrtNameErrorMessage);
+            setNewLastNameError(newLastNameErrorMessage);
+            return false;
+        }
+
+        return true;
+    }
 
     useEffect(() => {
         document.title = `Argent Bank - ${firstName} ${lastName}`
     }, [firstName, lastName])
 
     const handleClick = (evt) => {
+      //setShowForm(prevState => !prevState)
         dispatch(showForm())
+        //setClassButton(prevState => !prevState)
         dispatch(classButton())
+        //setButtonName(prevState => !prevState)
         dispatch(buttonName())
     }
 
-    const onSubmit = (data) => {
-        console.log(data)
-        dispatch(modifyName(token, data.newFirstName, data.newLastName))
+     /*const handleClickEdit = (event) => {
+         event.preventDefault()
+         history.push({pathname: `/edit-profile/${id}/${(firstName).toLowerCase()}`})
+     }*/
+     
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const isFormValid = validate();
+        if (isFormValid) {
+            dispatch(modifyName(token, newFirstName, newLastName)
+            )}
         history.push('/sign-in')
     }
 
-    if (!firstName) {
+     if(!firstName) {
         history.push({ pathname: `/sign-in` })
     }
 
@@ -51,34 +90,36 @@ function UserProfile() {
                 <div className="header">
                     <h1>Welcome back <br />
                         {
-                            showFormState ? firstName + ' ' + lastName + ' !' :
-                                <form onSubmit={handleSubmit(onSubmit)} className='bloc-form-edit'>
+                            showFormState ? firstName + ' ' + lastName + ' !' :   
+                                <form className='bloc-form-edit' onSubmit={(e)=>handleSubmit(e)}>
                                     <div className='bloc-name'>
-                                        <label htmlFor="newFirstName">Fisrt Name</label>
+                                        <label htmlFor="firstName">Fisrt Name</label>
                                         <input
                                             type='text'
-                                            id='newFirstName'
-                                            name='newFirstName'
+                                            id='firstName'
+                                            name='firstName'
                                             placeholder={firstName}
-                                            {...register("newFirstName", { required: "Firstname is required" })}
+                                            value={newFirstName ? newFirstName : firstName}
+                                            onChange={(event) => setNewFirstName(event.target.value)}
                                         />
-                                        <ErrorMessage errors={errors} name="newFirstName" />
-                                        <label htmlFor="newLastName">Last Name</label>
+                                        {newFirstNameError ? <div className="form-error">{newFirstNameError}</div> : null}
+                                        <label htmlFor="lastName">Last Name</label>
                                         <input
                                             type='text'
-                                            id='newLastName'
-                                            name='newLastName'
+                                            id='lastName'
+                                            name='lastName'
                                             placeholder={lastName}
-                                            {...register("newLastName", { required: "Firstname is required" })}
+                                            value={newLastName ? newLastName : lastName}
+                                            onChange={(event) => setNewLastName(event.target.value)}
                                         />
-                                        <ErrorMessage errors={errors} name="newLastName" />
+                                        {newLastNameError ? <div className="form-error">{newLastNameError}</div> : null}
                                     </div>
                                     <button className='edit-button' type='submit'>Save</button>
-                                    {status && status !== 200 ? <h3 className="error-login">{message}</h3> : null}
+                                    {status && status !== 200 ? <h3 className="error-login">{message}</h3> : null }
                                 </form>
                         }
                     </h1>
-                    <button className={`edit-button ${classButtonState ? "visiblePanel" : "invisiblePanel"}`} onClick={() => handleClick()}>
+                    <button className={`edit-button ${classButtonState ? "visiblePanel" : "invisiblePanel"}`} onClick={()=>handleClick()}>
                         {buttonNameState ? 'Edit Name' : 'Cancel'}
                     </button>
                 </div>
