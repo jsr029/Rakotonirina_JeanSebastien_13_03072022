@@ -160,22 +160,49 @@ paths:
           description: Internal Server Error
   /user/transaction:
     post:
-      security:
-        - Bearer: []
-      summary: 'User Transaction API'
-      operationId: userTransaction
+      security: [
+      ]    
+      summary: 'Logs user in the sytem'
+      description: API for Login
+      operationId: loginUser
       tags:
         - Transaction Module
       parameters:
-        - name: Authorization
-          in: header
-          description: Attach Bearer JWT token 
+        - name: title
+          in: query
+          description: user transaction title 
           required: true
-          schema: 
+          schema:
             type: string
+        - name: origin
+          in: query
+          description: user transaction origin 
+          required: true
+          schema:
+            type: string
+        - name: amount
+          in: query
+          description: user transaction amount 
+          required: true
+          schema:
+            type: string
+        - name: created
+          in: query
+          description: user transaction date 
+          required: true
+          schema:
+            type: string
+        - name: body
+          in: query
+          description: Login Payload
+          required: true
+          schema:
+            $ref: '#/components/schemas/Transactions'
+            produces: 
+              - application/json
       responses:
         '200':
-          description: 'User Transaction retrieved succesfully'
+          description: 'Login successfully'
           content:
             application/json:
               schema:
