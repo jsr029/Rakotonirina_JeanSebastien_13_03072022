@@ -1,0 +1,455 @@
+openapi: 3.0.0
+info:
+  version: '2.0.0'
+  title: Swagger Bank Argent API - OpenAPI 3.0 documentation
+  termsOfService: 'http://swagger.io/terms/'
+  description: |-
+    Contains all available API endpoints in this codebase
+  contact:
+    email: jsr059@gmail.com
+  license:
+    name: MIT
+servers:
+  - url: 'localhost:27017/api/v1'
+  - url: 'localhost:3001/api/v1'
+paths:
+  /user/login:
+    post:
+      security: [
+      ]    
+      summary: 'Logs user in the sytem'
+      description: API for Login
+      operationId: loginUser
+      tags:
+        - User Module
+      parameters:
+        - name: email
+          in: query
+          description: user email 
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: user password 
+          required: true
+          schema:
+            type: string
+        - name: body
+          in: query
+          description: Login Payload
+          required: true
+          schema:
+            $ref: '#/components/schemas/User'
+            produces: 
+              - application/json
+      responses:
+        '200':
+          description: 'Login successfully'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /user/signup:
+    post:
+      security: [
+      ]    
+      summary: 'API Signup'
+      operationId: userSignUp
+      tags:
+        - User Module
+      parameters:
+        - name: email
+          in: query
+          description: user email 
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: user password 
+          required: true
+          schema:
+            type: string
+        - name: firstName
+          in: query
+          description: user firstName 
+          required: true
+          schema:
+            type: string
+        - name: lastName
+          in: query
+          description: user lastName 
+          required: true
+          schema:
+            type: string
+        - name: body
+          in: query
+          description: SignUp Payload
+          required: true
+          schema:
+            $ref: '#/components/schemas/User'
+            produces: 
+              - application/json
+      responses:
+        '200':
+          description: 'Signup succesfully'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /user/profile:
+    post:
+      security:
+        - Bearer: []
+      summary: 'User Profile API'
+      operationId: userProfile
+      tags:
+        - User Module
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token 
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: 'User Profile retrieved succesfully'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+    put:
+      security:
+        - Bearer: []
+      summary: 'User Profile API'
+      description: API for updating a user profile
+      operationId: userUpdateProfile
+      tags:
+        - User Module
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token 
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: 'Signup succesfully'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /user/transaction:
+    post:
+<<<<<<< HEAD
+      security:
+        - Bearer: []
+      summary: 'User Transaction API'
+      operationId: userTransaction
+      tags:
+        - Transaction Module
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token 
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: 'User Transaction retrieved succesfully'
+=======
+      security: [
+      ]    
+      summary: 'Logs user in the sytem'
+      description: API for Login
+      operationId: loginUser
+      tags:
+        - Transaction Module
+      parameters:
+        - name: title
+          in: query
+          description: user transaction title 
+          required: true
+          schema:
+            type: string
+        - name: origin
+          in: query
+          description: user transaction origin 
+          required: true
+          schema:
+            type: string
+        - name: amount
+          in: query
+          description: user transaction amount 
+          required: true
+          schema:
+            type: string
+        - name: created
+          in: query
+          description: user transaction date 
+          required: true
+          schema:
+            type: string
+        - name: body
+          in: query
+          description: Login Payload
+          required: true
+          schema:
+            $ref: '#/components/schemas/Transactions'
+            produces: 
+              - application/json
+      responses:
+        '200':
+          description: 'Login successfully'
+>>>>>>> eb6248efa1b2275ce2a8b460f099e4fc8324f44b
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionsResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /user/transactions/{Month}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: 'Gets Transactions per Month API'
+      operationId: transactionsPerMonthId
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token 
+          required: true
+          schema: 
+            type: string
+        - name: Month
+          in: path
+          description: Month path parameter 
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: 'User transactions per Month retrieved succesfully'
+          content:
+            application/json:
+              schema:
+                type: array 
+                items: 
+                  $ref: '#/components/schemas/TransactionsResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /user/transaction/{Id}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: 'Gets Transactions per Id API'
+      operationId: transactionsPerId
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token 
+          required: true
+          schema: 
+            type: string
+        - name: Id
+          in: path
+          description: Id path parameter 
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: 'User transactions per Id retrieved succesfully'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionsResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: 'Updates Transaction per Id API'
+      operationId: updateransactionsPerId
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token 
+          required: true
+          schema: 
+            type: string
+        - name: Id
+          in: path
+          description: Id path parameter 
+          required: true
+          schema: 
+            type: string
+            $ref: '#/components/schemas/Transactions'
+      responses:
+        '200':
+          description: 'User transaction per Id updated succesfully'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Deletes a Transaction
+      description: delete a Transaction
+      operationId: deleteTransaction
+      parameters:
+        - name: Authorization
+          in: header
+          description: Attach Bearer JWT token 
+          required: true
+          schema: 
+            type: string
+        - name: Id
+          in: path
+          description: Id path parameter 
+          required: true
+          schema: 
+            type: string
+      responses:
+        '200':
+          description: 'User transaction deleted succesfully'
+        '400':
+          description: Id is Invalid
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    User:
+      type: object
+      required:
+        - firstName
+        - lastName
+        - email
+        - password
+      properties:
+        firstName:
+          type: string
+          example: Steve
+        lastName:
+          type: string
+          example: Rogers
+        email:
+          type: string
+          example: steve@rogers.com
+        password:
+          type: string
+          example: password456
+    Profile:
+      type: object
+      properties:
+        email:
+          type: string
+          example: tony@stark.com
+          description: user email
+        password:
+          type: string
+          example: password123
+          description: user password
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+    Transactions:
+      type: object
+      properties:
+        title:
+          type: string
+        origin:
+          type: string
+        amount:
+          type: string
+          format: integer
+        created:
+          type: string
+          description: created date
+          example: 28/10/22
+          pattern: DD/MM/YYYY
+          format: date
+          minLength: 0
+          maxLength: 10
+    TransactionsResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message:
+          type: string
+        body:
+          type: object
+          properties:
+            id:
+              type: string
+            title:
+              type: string
+            amount:
+              type: integer
+              format: int64
+            created:
+              type: string
+              description: created date
+              example: 28/10/22
+              pattern: DD/MM/YYYY
+              format: date
+              minLength: 0
+              maxLength: 10
+    ApiResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        message: 
+          type: string
+        body:
+          type: object
+          properties:
+            id:
+              type: string
+            email:
+              type: string
+  securitySchemes:
+    Bearer:
+      type: http
+      scheme: bearer
+security:
+  - Bearer: []
