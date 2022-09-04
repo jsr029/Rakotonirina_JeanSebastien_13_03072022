@@ -160,6 +160,7 @@ paths:
           description: Internal Server Error
   /user/transaction:
     post:
+<<<<<<< HEAD
       security:
         - Bearer: []
       summary: 'User Transaction API'
@@ -176,6 +177,51 @@ paths:
       responses:
         '200':
           description: 'User Transaction retrieved succesfully'
+=======
+      security: [
+      ]    
+      summary: 'Logs user in the sytem'
+      description: API for Login
+      operationId: loginUser
+      tags:
+        - Transaction Module
+      parameters:
+        - name: title
+          in: query
+          description: user transaction title 
+          required: true
+          schema:
+            type: string
+        - name: origin
+          in: query
+          description: user transaction origin 
+          required: true
+          schema:
+            type: string
+        - name: amount
+          in: query
+          description: user transaction amount 
+          required: true
+          schema:
+            type: string
+        - name: created
+          in: query
+          description: user transaction date 
+          required: true
+          schema:
+            type: string
+        - name: body
+          in: query
+          description: Login Payload
+          required: true
+          schema:
+            $ref: '#/components/schemas/Transactions'
+            produces: 
+              - application/json
+      responses:
+        '200':
+          description: 'Login successfully'
+>>>>>>> eb6248efa1b2275ce2a8b460f099e4fc8324f44b
           content:
             application/json:
               schema:
