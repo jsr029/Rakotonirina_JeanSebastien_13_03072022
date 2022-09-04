@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 const databaseUrl =
   process.env.DATABASE_URL || 'mongodb://localhost/argentBankDB'
-
+  
+mongoose.set('useFindAndModify', false);
 module.exports = async () => {
   try {
     await mongoose.connect(databaseUrl, { useNewUrlParser: true, useUnifiedTopology: true })

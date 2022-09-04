@@ -35,9 +35,8 @@ function UserProfile() {
     }
 
     const onSubmit = (data) => {
-        console.log(data)
         dispatch(modifyName(token, data.newFirstName, data.newLastName))
-        history.push('/sign-in')
+        //history.push('/sign-in')
     }
 
     if (!firstName) {
